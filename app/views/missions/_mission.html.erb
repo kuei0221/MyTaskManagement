@@ -1,8 +1,8 @@
-<tr>
-  <td>
+<tr class="mission" id="mission-<%= mission.id %>">
+  <td class="mission-name">
     <%= link_to mission.name, mission_path(mission.id) %>
   </td>
-  <td>
+  <td class="mission-content">
     <%= mission.content %>
   </td>
   <td><%= link_to "Edit Mission", edit_mission_path(mission.id) %></td>
