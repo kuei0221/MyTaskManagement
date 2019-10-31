@@ -1,0 +1,14 @@
+<h1>Create New Mission</h1>
+
+<%= form_for(@mission, url: missions_path, method: "post") do |f| %>
+  
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  
+  <%= f.label :content %>
+  <%= f.text_area :content %>
+
+  <%= f.submit "Create!" %>
+<% end %>
+
+<%= link_to "Cancel and Back to Missions list", missions_path %>

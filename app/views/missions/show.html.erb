@@ -1,0 +1,9 @@
+<h1>Mission: <%= @mission.name %></h1>
+
+<p>
+  <%= @mission.content %>
+</p>
+
+<%= link_to "Edit Mission", edit_mission_path(@mission.id) %>
+<%= link_to "Delete Mission", mission_path(@mission.id), method: "delete", data: {confirm: "Are you sure"} %>
+<%= link_to "Back to Missions list", missions_path %>

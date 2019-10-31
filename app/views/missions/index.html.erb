@@ -1,0 +1,17 @@
+<h1>My Task Management</h1>
+
+<%= link_to "New Mission", new_mission_path %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Content</th>
+      <th>Edit</th>
+      <th>Destroy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render partial: "mission", collection: @missions %>
+  </tbody>
+</table>

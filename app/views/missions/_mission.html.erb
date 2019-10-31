@@ -1,0 +1,10 @@
+<tr>
+  <td>
+    <%= link_to mission.name, mission_path(mission.id) %>
+  </td>
+  <td>
+    <%= mission.content %>
+  </td>
+  <td><%= link_to "Edit Mission", edit_mission_path(mission.id) %></td>
+  <td><%= link_to "Delete Mission", mission_path(mission.id), method: "delete", data: {confirm: "Are you sure"} %></td>
+</tr>
