@@ -1,14 +1,14 @@
-<h1>Create New Mission</h1>
+<h1><%= t("missions.new.title") %></h1>
 
 <%= form_for(@mission, url: missions_path, method: "post") do |f| %>
   
-  <%= f.label :name %>
+  <%= f.label t("missions.table.name") %>
   <%= f.text_field :name %>
   
-  <%= f.label :content %>
+  <%= f.label t("missions.table.content") %>
   <%= f.text_area :content %>
 
-  <%= f.submit "Create!" %>
+  <%= f.submit t("missions.table.create") %>
 <% end %>
 
-<%= link_to "Cancel and Back to Missions list", missions_path %>
+<%= link_to t("missions.return_button"), missions_path %>

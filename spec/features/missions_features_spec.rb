@@ -4,8 +4,11 @@ RSpec.feature "mission", type: :feature do
 
   before do
     create_list(:mission, 4)
+    # page.driver.header 'Accept-Language', locale
+    # I18n.locale = locale
   end
   let!(:mission) {create(:mission)}
+  # let(:locale) { :en }
 
   scenario "with mission list" do
     visit root_path
@@ -34,7 +37,7 @@ RSpec.feature "mission", type: :feature do
     fill_in "Content", with: "Testing Mission Content"
     click_button "Create!"
     expect(page).to have_current_path root_path
-    expect(page).to have_text "Create New Mission Success!"
+    expect(page).to have_text "Create New Mission Success."
     expect(page).to have_content "Testing Mission name"
     expect(page).to have_content "Testing Mission Content"
     expect(page).to have_css(".mission", count: 6)
@@ -47,7 +50,7 @@ RSpec.feature "mission", type: :feature do
     fill_in "Content", with: "Updating Mission Content"
     click_button "Update!"
     expect(page).to have_current_path mission_path(mission.id)
-    expect(page).to have_text "Update Success!"
+    expect(page).to have_text "Update Success."
     expect(page).to have_content "Updating Mission name"
     expect(page).to have_content "Updating Mission Content"
   end

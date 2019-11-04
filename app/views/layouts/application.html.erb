@@ -12,5 +12,8 @@
   <body>
     <% flash.each {|type, msg| concat content_tag(:p, msg) } if flash.any? %>
     <%= yield %>
+    
+    <%= link_to "中文版", :controller => controller_name, :action => action_name, :locale => "zh-TW" %>
+    <%= link_to "English", :controller => controller_name, :action => action_name, :locale => "en" %>
   </body>
 </html>

@@ -1,33 +1,32 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  missions:
+    create_button: New Mission
+    edit_button: Edit Mission
+    destroy_button: Delete Mission
+    return_button: Back to Missions list
+    table:
+      name: name
+      content: content
+      create: Create
+      update: Update
+      edit: Edit
+      destroy: Destroy
+    index:
+      title: My Task Management System
+    new:
+      title: Create New Mission
+    create: 
+      success: Create New Mission Success.
+      fail: Error Occurred when Creating New Mission.
+    show:
+      title: "Mission: "
+      fail: Cannot find this mission.
+    edit:
+      title: Edit this Mission
+    update:
+      success: Update Success.
+      fail: Error Occurred when Updating Mission.
+    destroy:
+      alert: Are you sure you want to delete this mission?
+      success: Delete Mission Success!
+      fail: Error Occurred when Deleting Mission

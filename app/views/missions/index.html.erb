@@ -1,14 +1,14 @@
-<h1>My Task Management</h1>
+<h1><%= t("missions.index.title") %></h1>
 
-<%= link_to "New Mission", new_mission_path %>
+<%= link_to t("missions.create_button"), new_mission_path %>
 
 <table id="missions_table">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Content</th>
-      <th>Edit</th>
-      <th>Destroy</th>
+      <th><%= t("missions.table.name") %></th>
+      <th><%= t("missions.table.content") %></th>
+      <th><%= t("missions.table.edit") %></th>
+      <th><%= t("missions.table.destroy") %></th>
     </tr>
   </thead>
   <tbody>

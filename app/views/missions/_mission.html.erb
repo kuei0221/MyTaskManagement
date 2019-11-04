@@ -5,6 +5,6 @@
   <td class="mission-content">
     <%= mission.content %>
   </td>
-  <td><%= link_to "Edit Mission", edit_mission_path(mission.id) %></td>
-  <td><%= link_to "Delete Mission", mission_path(mission.id), method: "delete", data: {confirm: "Are you sure"} %></td>
+  <td><%= link_to t("missions.edit_button"), edit_mission_path(mission.id) %></td>
+  <td><%= link_to t("missions.destroy_button"), mission_path(mission.id), method: "delete", data: {confirm: t("missions.destroy.alert")} %></td>
 </tr>
