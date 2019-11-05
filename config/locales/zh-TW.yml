@@ -8,6 +8,7 @@ zh-TW:
       name: 任務名稱
       content: 任務內容
       create: 新增
+      created_at: 建立時間
       update: 更新
       edit: 編輯
       destroy: 刪除

@@ -1,8 +1,7 @@
 <h1><%= t("missions.show.title") + @mission.name %></h1>
+<h4><%= t("missions.table.created_at")+ ": " + @mission.created_at.to_s(:short) %></h4>
 
-<p>
-  <%= @mission.content %>
-</p>
+<p><%= @mission.content %></p>
 
 <%= link_to t("missions.edit_button"), edit_mission_path(@mission.id) %>
 <%= link_to t("missions.destroy_button"), mission_path(@mission.id), method: "delete", data: {confirm:  t("missions.destroy.alert")} %>

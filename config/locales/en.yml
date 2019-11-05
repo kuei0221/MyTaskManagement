@@ -8,6 +8,7 @@ en:
       name: Name
       content: Content
       create: Create
+      created_at: Created at
       update: Update
       edit: Edit
       destroy: Destroy

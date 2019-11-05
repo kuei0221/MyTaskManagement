@@ -17,7 +17,10 @@ RSpec.feature "mission", type: :feature do
     expect(page).to have_css("#missions_table")
     expect(page).to have_content(I18n.t("missions.table.name"))
     expect(page).to have_content(I18n.t("missions.table.content"))
+    expect(page).to have_content(I18n.t("missions.table.created_at"))
     expect(page).to have_css(".mission", count: 5)
+    all_datetime = all(".mission-created-at").map(&:text).map(&:to_datetime)
+    expect(all_datetime[0]).to be < all_datetime[1]
   end
   
   scenario "when viewing specific mission" do
@@ -25,6 +28,7 @@ RSpec.feature "mission", type: :feature do
     expect(page).to have_current_path mission_path(mission.id)
     expect(page).to have_content(mission.name)
     expect(page).to have_content(mission.content)
+    expect(page).to have_content(mission.created_at.to_s(:short))
     expect(page).to have_link(I18n.t("missions.edit_button"))
     expect(page).to have_link(I18n.t("missions.destroy_button"))
     expect(page).to have_link(I18n.t("missions.return_button"))
