@@ -20,7 +20,6 @@ RSpec.feature "mission", type: :feature do
     expect(page).to have_content(I18n.t("missions.table.created_at"))
     expect(page).to have_css(".mission", count: 5)
     all_datetime = all(".mission-created-at").map(&:text).map(&:to_datetime)
-    byebug
     expect(all_datetime[0]).to be < all_datetime[1]
   end
   

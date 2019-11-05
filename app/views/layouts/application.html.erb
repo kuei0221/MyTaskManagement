@@ -10,7 +10,8 @@
   </head>
 
   <body>
-    <% flash.each {|type, msg| concat content_tag(:p, msg) } if flash.any? %>
+    <!-- <% flash.each {|type, msg| concat content_tag(:p, msg) } if flash.any? %> -->
+    <% show_flash %>
     <%= yield %>
     
     <%= link_to "中文版", :controller => controller_name, :action => action_name, :locale => "zh-TW" %>

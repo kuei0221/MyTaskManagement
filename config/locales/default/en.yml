@@ -1,0 +1,6 @@
+en:
+  activerecord:
+    attributes:
+      mission:
+        name: Name
+        content: Content

@@ -14,6 +14,7 @@ class MissionsController < ApplicationController
       redirect_to root_path, notice: t("missions.create.success")
     else
       flash.now[:alert] = t("missions.create.fail")
+      flash.now[:error] = @mission.errors.full_messages
       render :new
     end
   end
@@ -36,6 +37,7 @@ class MissionsController < ApplicationController
       redirect_to mission_path(@mission.id), notice: t("missions.update.success")
     else
       flash.now[:alert] = t("missions.update.fail")
+      flash.now[:error] = @mission.errors.full_messages
       render :edit
     end
   end
