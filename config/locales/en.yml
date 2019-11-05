@@ -5,8 +5,8 @@ en:
     destroy_button: Delete Mission
     return_button: Back to Missions list
     table:
-      name: name
-      content: content
+      name: Name
+      content: Content
       create: Create
       update: Update
       edit: Edit

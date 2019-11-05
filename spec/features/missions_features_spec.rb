@@ -13,10 +13,10 @@ RSpec.feature "mission", type: :feature do
   scenario "with mission list" do
     visit root_path
     expect(page).to have_current_path root_path
-    expect(page).to have_link("New Mission")
+    expect(page).to have_link(I18n.t("missions.create_button"))
     expect(page).to have_css("#missions_table")
-    expect(page).to have_content("Name")
-    expect(page).to have_content("Content")
+    expect(page).to have_content(I18n.t("missions.table.name"))
+    expect(page).to have_content(I18n.t("missions.table.content"))
     expect(page).to have_css(".mission", count: 5)
   end
   
@@ -25,19 +25,19 @@ RSpec.feature "mission", type: :feature do
     expect(page).to have_current_path mission_path(mission.id)
     expect(page).to have_content(mission.name)
     expect(page).to have_content(mission.content)
-    expect(page).to have_link("Edit Mission")
-    expect(page).to have_link("Delete Mission")
-    expect(page).to have_link("Back to Missions list")
+    expect(page).to have_link(I18n.t("missions.edit_button"))
+    expect(page).to have_link(I18n.t("missions.destroy_button"))
+    expect(page).to have_link(I18n.t("missions.return_button"))
   end
   
   scenario "when creating new mission" do
     visit new_mission_path
     expect(page).to have_current_path new_mission_path
-    fill_in "Name", with: "Testing Mission name"
-    fill_in "Content", with: "Testing Mission Content"
-    click_button "Create!"
+    fill_in "mission_name", with: "Testing Mission name"
+    fill_in "mission_content", with: "Testing Mission Content"
+    click_button I18n.t("missions.table.create")
     expect(page).to have_current_path root_path
-    expect(page).to have_text "Create New Mission Success."
+    expect(page).to have_text I18n.t("missions.create.success")
     expect(page).to have_content "Testing Mission name"
     expect(page).to have_content "Testing Mission Content"
     expect(page).to have_css(".mission", count: 6)
@@ -46,20 +46,20 @@ RSpec.feature "mission", type: :feature do
   scenario "when updating mission" do
     visit edit_mission_path(mission.id)
     expect(page).to have_current_path edit_mission_path(mission.id)
-    fill_in "Name", with: "Updating Mission name"
-    fill_in "Content", with: "Updating Mission Content"
-    click_button "Update!"
+    fill_in "mission_name", with: "Updated Mission name"
+    fill_in "mission_content", with: "Updated Mission Content"
+    click_button I18n.t("missions.table.update")
     expect(page).to have_current_path mission_path(mission.id)
-    expect(page).to have_text "Update Success."
-    expect(page).to have_content "Updating Mission name"
-    expect(page).to have_content "Updating Mission Content"
+    expect(page).to have_text I18n.t("missions.update.success")
+    expect(page).to have_content "Updated Mission name"
+    expect(page).to have_content "Updated Mission Content"
   end
   
   scenario "when deleting mission" do
     visit mission_path(mission.id)
-    expect(page).to have_link("Delete Mission")
-    click_link "Delete Mission"
-    expect(page).to have_text "Delete Mission Success!"
+    expect(page).to have_link(I18n.t("missions.destroy_button"))
+    click_link I18n.t("missions.destroy_button")
+    expect(page).to have_text I18n.t("missions.destroy.success")
     expect(page).to have_current_path root_path
     expect(page).to have_css(".mission", count: 4)
   end
