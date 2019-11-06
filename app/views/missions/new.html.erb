@@ -8,6 +8,12 @@
   <%= f.label t("missions.table.content") %>
   <%= f.text_area :content %>
 
+  <%= f.label t("missions.table.deadline") %>
+  <%= select_date Date.today, start_year: Date.today.year, prefix: :deadline %>
+
+  <%= label_tag :no_deadline, t("missions.table.no_deadline") %>
+  <%= check_box_tag :no_deadline %>
+
   <%= f.submit t("missions.table.create") %>
 <% end %>
 

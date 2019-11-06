@@ -2,14 +2,40 @@
 
 <%= form_for(@mission, url: mission_path(@mission.id), method: "patch") do |f| %>
   
-<%= f.label t("missions.table.name") %>
-<%= f.text_field :name %>
+  <%= f.label t("missions.table.name") %>
+  <%= f.text_field :name %>
 
-<%= f.label t("missions.table.content") %>
-<%= f.text_area :content %>
+  <%= f.label t("missions.table.content") %>
+  <%= f.text_area :content %>
 
-<%= f.submit t("missions.table.update") %>
+  <% if @mission.deadline.nil? %>
+    <% no_deadline = true %>
+    <% checked_value = 1 %>
+  <% else %>
+    <% no_deadline = false %>
+    <% checked_value = 0 %>
+  <% end %>
+
+  <%= f.label t("missions.table.deadline") %>
+  <%= select_date @mission.deadline, start_year: Date.today.year, disabled: no_deadline, prefix: :deadline %>
+  <%= label_tag :no_deadline, t("missions.table.no_deadline") %>  
+  <%= check_box_tag :no_deadline, checked_value, no_deadline %>
+
+
+  <%= f.submit t("missions.table.update") %>
 <% end %>
 
 
 <%= link_to t("missions.return_button"), missions_path %>
+
+<script>
+  $(document).on("turbolinks:load", function(){
+    console.log("set disable")
+    var disabled = $("#no_deadline").attr("checked") == null
+    $('#no_deadline').on('click', function() {
+      $("select").prop("disabled", disabled)
+      disabled = !disabled
+    });
+
+  })
+</script>

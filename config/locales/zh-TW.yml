@@ -12,6 +12,8 @@ zh-TW:
       update: 更新
       edit: 編輯
       destroy: 刪除
+      deadline: 結束時間
+      no_deadline: 不設定結束時間
     index:
       title: 我的任務管理系統
     new:

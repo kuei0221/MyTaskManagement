@@ -59,16 +59,6 @@ RSpec.describe Mission, type: :model do
         expect(mission).to be_invalid
       end
     end
-
-
   end
 
-  describe "default_scope" do
-    before { create_list(:mission, 5) }
-    it "should sort mission in asc time order" do
-      expect(Mission.first.created_at).to be < Mission.second.created_at
-      expect(Mission.second.created_at).to be < Mission.third.created_at
-      expect(Mission.third.created_at).to be < Mission.last.created_at
-    end
-  end
 end

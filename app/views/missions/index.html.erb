@@ -7,7 +7,8 @@
     <tr>
       <th><%= t("missions.table.name") %></th>
       <th><%= t("missions.table.content") %></th>
-      <th><%= t("missions.table.created_at") %></th>
+      <th><button onclick="Sort('created_at')"><%= t("missions.table.created_at") %></button></th>
+      <th><button onclick="Sort('deadline')"><%= t("missions.table.deadline") %></button></th>
       <th><%= t("missions.table.edit") %></th>
       <th><%= t("missions.table.destroy") %></th>
     </tr>
@@ -16,3 +17,31 @@
     <%= render partial: "mission", collection: @missions %>
   </tbody>
 </table>
+
+<script>
+  var created_at_button = new Object({direction: "asc"});
+  var deadline_button = new Object({direction: "asc"});
+  var button;
+  function Sort(column){
+    CheckColumn(column);
+    TriggerDirection(button);
+    console.log(button.direction)
+    $.ajax({
+      url: "<%= missions_path %>",
+      type: "GET",
+      dataType: "script",
+      data: {"column": column, "direction": button.direction}
+    })
+  }
+  function CheckColumn(column){
+    if(column == "deadline"){ button = deadline_button }
+    if(column == "created_at"){ button = created_at_button }
+  }
+  function TriggerDirection(button){
+    if( button.direction =="asc" ){
+      button.direction = "desc"
+    } else {
+      button.direction = "asc"
+    }
+  }
+</script>

@@ -12,6 +12,8 @@ en:
       update: Update
       edit: Edit
       destroy: Destroy
+      deadline: Deadline
+      no_deadline: No Deadline
     index:
       title: My Task Management System
     new:

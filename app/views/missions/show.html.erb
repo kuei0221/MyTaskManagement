@@ -1,5 +1,10 @@
 <h1><%= t("missions.show.title") + @mission.name %></h1>
 <h4><%= t("missions.table.created_at")+ ": " + @mission.created_at.to_s(:short) %></h4>
+<% if @mission.deadline.present? %>
+  <p><%= t("missions.table.deadline")+ ": " +  @mission.deadline.to_s %></p>
+<% else %>
+  <p><%= t("missions.table.deadline")+ ": " +  t("missions.table.no_deadline") %></p>
+<% end %>
 
 <p><%= @mission.content %></p>
 

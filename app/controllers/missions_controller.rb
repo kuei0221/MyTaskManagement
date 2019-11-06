@@ -1,7 +1,17 @@
 class MissionsController < ApplicationController
 
   def index
-    @missions = Mission.all
+    if check_order_button_params
+      direction = params["direction"]
+      column = params["column"]
+      @missions = Mission.order(column+ " "+ direction)
+    else
+      @missions = Mission.order(created_at: :asc)
+    end
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def new
@@ -10,6 +20,7 @@ class MissionsController < ApplicationController
 
   def create
     @mission = Mission.new(mission_params)
+    check_and_build_deadline @mission
     if @mission.save
       redirect_to root_path, notice: t("missions.create.success")
     else
@@ -33,6 +44,7 @@ class MissionsController < ApplicationController
   
   def update
     @mission = Mission.find_by(id: params[:id])
+    check_and_build_deadline @mission
     if @mission.update(mission_params)
       redirect_to mission_path(@mission.id), notice: t("missions.update.success")
     else
@@ -54,6 +66,24 @@ class MissionsController < ApplicationController
   private
   def mission_params
     params.require(:mission).permit(:name, :content)
+  end
+
+  def check_and_build_deadline(mission)
+    if params.has_key?("no_deadline")
+      mission.deadline = nil
+    else
+      mission.deadline = Date.civil(
+        params[:deadline][:year].to_i,
+        params[:deadline][:month].to_i,
+        params[:deadline][:day].to_i)
+    end
+  end
+
+  def check_order_button_params
+    params.has_key?("direction") && 
+    params.has_key?("column") && 
+    Mission.attribute_names.include?(params["column"]) && 
+    %w[asc desc].include?(params["direction"])
   end
 
 end
