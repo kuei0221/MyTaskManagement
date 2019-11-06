@@ -4,3 +4,9 @@ en:
       mission:
         name: Name
         content: Content
+        deadline: Deadline
+    errors:
+      messages:
+        mission:
+          datetime_before_created: "can not be earlier than it is created"
+          datetime_before_now: "can not be earlier than now"

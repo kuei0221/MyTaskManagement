@@ -61,4 +61,34 @@ RSpec.describe Mission, type: :model do
     end
   end
 
+  describe "mission.deadline" do
+    context "with valid date" do
+      it "should be valid " do
+        expect(mission).to be_valid
+      end
+    end
+
+    context "without provide date" do
+      it "should be valid" do
+        mission = build(:mission, deadline: nil)
+        expect(mission).to be_valid
+      end
+    end
+
+    context "with past date" do
+      it "should be fail" do
+        mission = build(:mission, deadline: Faker::Date.backward(days: 10))
+        expect(mission).to be_invalid
+      end
+    end
+
+    context "with date earlier than created date" do
+      it "should be fail" do
+        mission = build(:mission, created_at: DateTime.now, deadline: (DateTime.now - 10))
+        expect(mission).to be_invalid
+      end
+    end
+
+  end
+
 end

@@ -4,3 +4,10 @@ zh-TW:
       mission:
         name: "任務名稱"
         content: "任務內容"
+        deadline: "任務期限"
+    errors:
+      messages:
+        mission:
+          datetime_before_created: "不能比其創建日期還早"
+          datetime_before_now: "不能是過去的日期"
+
