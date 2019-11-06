@@ -38,8 +38,6 @@ group :development, :test do
   gem "capybara"
   gem "factory_bot_rails"
   gem "faker"
-  # gem 'selenium-webdriver'
-  # gem 'chromedriver-helper'
 end
 
 group :development do
