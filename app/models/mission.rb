@@ -5,6 +5,19 @@ class Mission < ApplicationRecord
   validates :content, presence: true, length: {minimum: 8, maximum: 254 }
   validate :datetime_before_created, on: :update
   validate :datetime_before_now
+  validates :work_state, presence: true, inclusion: { in: %w[ waiting progressing completed ],
+                                                      message: I18n.t("activerecord.errors.messages.mission.exist_work_state_type")}                                                      
+  def progress
+    work_state == "waiting" ? update(work_state: "progressing") : false
+  end
+  
+  def wait
+    work_state == "progressing" ? update(work_state: "waiting") : false
+  end
+  
+  def complete
+    work_state == "progressing" ? update(work_state: "completed") : false
+  end
 
   private
   def datetime_before_created
