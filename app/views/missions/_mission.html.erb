@@ -3,7 +3,7 @@
   <td class="mission-content"><%= mission.content %></td>
   <td class="mission-created-at"><%= mission.created_at.to_s(:short) %> </td>
   <td class="mission-deadline"><%= mission.deadline.present? ? mission.deadline : t("missions.table.no_deadline") %> </td>
-  <td class="mission-work-state"><%= mission.work_state %> </td>
+  <td class="mission-work-state"><%= t("missions.table.state_type.#{mission.work_state}") %> </td>
 
   <td><%= link_to t("missions.edit_button"), edit_mission_path(mission.id) %></td>
   <td><%= link_to t("missions.destroy_button"), mission_path(mission.id), method: "delete", data: {confirm: t("missions.destroy.alert")} %></td>

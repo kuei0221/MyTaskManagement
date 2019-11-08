@@ -157,4 +157,53 @@ RSpec.describe Mission, type: :model do
 
   end
 
+  describe "::search scope" do
+    before do
+      create_list(:mission, 2, :waiting)
+      create_list(:mission, 3, :progressing)
+      create_list(:mission, 4, :completed)
+    end
+    
+    context "with search_by_name" do
+      let!(:m1) { create(:mission, :waiting, name: "test example") }
+      let!(:m2) { create(:mission, :progressing, name: "TESTING EXAMPLE") }
+      let!(:m3) { create(:mission, :completed, name: "Tested Example") }
+      it "should find the mission include given name" do
+        missions = Mission.search_by_name("Test")
+        expect(missions.include?(m1)).to be true
+        expect(missions.include?(m2)).to be true
+        expect(missions.include?(m3)).to be true
+      end
+    end
+    
+    context "with search_by_work_state" do
+      it "should find the correct number of mission with match state" do
+        missions = Mission.search_by_work_state(:waiting)
+        expect(missions.size).to eq(2)
+        missions = Mission.search_by_work_state(:progressing)
+        expect(missions.size).to eq(3)
+        missions = Mission.search_by_work_state(:completed)
+        expect(missions.size).to eq(4)
+      end
+    end
+    
+    context "with search_by_state_and_name" do
+      let!(:m1) { create(:mission, :waiting, name: "test example") }
+      let!(:m2) { create(:mission, :progressing, name: "TESTING EXAMPLE") }
+      let!(:m3) { create(:mission, :completed, name: "Tested Example") }
+
+      it "should find the match mission" do
+        mission = Mission.search_by_state_and_name(:waiting, "test")
+        expect(mission).to include m1
+        mission = Mission.search_by_state_and_name(:progressing, "test")
+        expect(mission).to include m2
+        mission = Mission.search_by_state_and_name(:completed, "test")
+        expect(mission).to include m3
+      end
+    end
+
+    
+  end
+
+
 end

@@ -7,9 +7,9 @@ en:
         deadline: Deadline
         work_state: Work State
         state_type:
-          waiting: waiting
-          progressing: progressing
-          completed: completed
+          waiting: Waiting
+          progressing: Progressing
+          completed: Completed
     errors:
       messages:
         mission:

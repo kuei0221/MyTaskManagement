@@ -14,6 +14,15 @@ zh-TW:
       destroy: 刪除
       deadline: 結束時間
       no_deadline: 不設定結束時間
+      work_state: 狀態
+      state_type:
+        waiting: 待處理
+        progressing: 處理中
+        completed: 已完成
+      search:
+        query: 請輸入任務名稱
+        work_state: 任務狀態
+        submit: 搜尋
     index:
       title: 我的任務管理系統
     new:
@@ -33,3 +42,9 @@ zh-TW:
       alert: 確定刪除此任務?
       success: 成功刪除此任務
       fail: 無法刪除此任務
+  search:
+    index:
+      alert: 無法任何符合條件的任務
+  sorts:
+    index:
+      alert: "無效的排序"

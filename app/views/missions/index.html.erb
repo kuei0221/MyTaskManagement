@@ -1,5 +1,13 @@
 <h1><%= t("missions.index.title") %></h1>
 
+<%= form_tag search_path, id: "search", method: "get" do %>
+  <%= label_tag :query, t("missions.table.search.query") %>
+  <%= text_field_tag :query %>
+  <%= label_tag :work_state, t("missions.table.search.work_state") %>
+  <%= select_tag :work_state, options_for_select(["waiting", "progressing", "completed"]), include_blank: true %>
+  <%= submit_tag t("missions.table.search.submit") %>
+<% end %>
+
 <%= link_to t("missions.create_button"), new_mission_path %>
 
 <table id="missions_table">
@@ -9,12 +17,20 @@
       <th><%= t("missions.table.content") %></th>
       <th><button onclick="Sort('created_at')"><%= t("missions.table.created_at") %></button></th>
       <th><button onclick="Sort('deadline')"><%= t("missions.table.deadline") %></button></th>
+      <th>
+        <button><%= t("missions.table.work_state") %></button>
+        <ul>
+          <li><%= link_to t("missions.table.work_state.waiting"), search_path(work_state: "waiting") %></li>
+          <li><%= link_to t("missions.table.work_state.progressing"), search_path(work_state: "progressing") %></li>
+          <li><%= link_to t("missions.table.work_state.completed"), search_path(work_state: "completed") %></li>
+        </ul>
+      </th>
       <th><%= t("missions.table.edit") %></th>
       <th><%= t("missions.table.destroy") %></th>
     </tr>
   </thead>
   <tbody>
-    <%= render partial: "mission", collection: @missions %>
+    <%= render partial: "missions/mission", collection: @missions %>
   </tbody>
 </table>
 
@@ -27,10 +43,10 @@
     TriggerDirection(button);
     console.log(button.direction)
     $.ajax({
-      url: "<%= missions_path %>",
+      url: "<%= sort_path %>",
       type: "GET",
       dataType: "script",
-      data: {"column": column, "direction": button.direction}
+      data: {"column": column, "direction": button.direction, "query": GetQueryString() }
     })
   }
   function CheckColumn(column){
@@ -43,5 +59,13 @@
     } else {
       button.direction = "asc"
     }
+  }
+
+  function GetQueryString(){
+    var queryhash = {};
+    url = new URL(window.location);
+    queryhash["query"] = url.searchParams.get("query");
+    queryhash["work_state"] = url.searchParams.get("work_state");
+    return queryhash;
   }
 </script>

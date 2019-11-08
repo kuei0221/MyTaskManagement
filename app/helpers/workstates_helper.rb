@@ -1,0 +1,2 @@
+module WorkstatesHelper
+end

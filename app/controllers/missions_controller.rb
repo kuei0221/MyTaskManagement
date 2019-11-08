@@ -1,17 +1,7 @@
 class MissionsController < ApplicationController
 
   def index
-    if check_order_button_params
-      direction = params["direction"]
-      column = params["column"]
-      @missions = Mission.order(column+ " "+ direction)
-    else
-      @missions = Mission.order(created_at: :asc)
-    end
-    respond_to do |format|
-      format.html
-      format.js
-    end
+    @missions = Mission.order_by_created_at(:asc)
   end
 
   def new
@@ -78,12 +68,5 @@ class MissionsController < ApplicationController
         params[:deadline][:day].to_i)
     end
   end
-
-  def check_order_button_params
-    params.has_key?("direction") && 
-    params.has_key?("column") && 
-    Mission.attribute_names.include?(params["column"]) && 
-    %w[asc desc].include?(params["direction"])
-  end
-
+  
 end
