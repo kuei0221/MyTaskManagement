@@ -1,7 +1,9 @@
 class SearchController < ApplicationController
 
   def index
-    if params[:query].present? && params[:work_state].present?
+    name = params[:query]
+    work_state = params[:work_state]
+    if name.present? && work_state.present?
       @missions = Mission.search_by_state_and_name(params[:work_state], params[:query]).order_by_created_at(:asc)
     end
 

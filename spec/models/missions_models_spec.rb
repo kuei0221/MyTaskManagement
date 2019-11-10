@@ -109,8 +109,8 @@ RSpec.describe Mission, type: :model do
 
     context "with invalid work-state" do
       it "should be invalid with not used state" do
-        mission = build(:mission, work_state: "not_used_state")
-        expect(mission).to be_invalid
+        expect{build(:mission, work_state: "not_used_state")}.to raise_error(ArgumentError, /is not a valid work_state/)
+        expect{build(:mission, work_state: 3)}.to raise_error(ArgumentError, /is not a valid work_state/)
       end
 
       it "should be invalid with nil" do
@@ -119,7 +119,7 @@ RSpec.describe Mission, type: :model do
       end
     end
 
-    context "with ::wait" do
+    context "with #wait" do
       it "should switch work_state to waiting when it is progressing" do
         mission = create(:mission, :progressing)
         expect(mission.wait).to be true
@@ -131,7 +131,7 @@ RSpec.describe Mission, type: :model do
       end
     end
     
-    context "with ::progress" do
+    context "with #progress" do
       it "should switch work state to progressing when it is waiting" do
         mission = create(:mission, :waiting)
         expect(mission.progress).to be true
@@ -143,7 +143,7 @@ RSpec.describe Mission, type: :model do
       end
     end
     
-    context "with ::completed" do
+    context "with #complete" do
       it "should switch work state to completed when it is progressing" do
         mission = create(:mission, :progressing)
         expect(mission.complete).to be true
@@ -203,6 +203,56 @@ RSpec.describe Mission, type: :model do
     end
 
     
+  end
+
+  describe "mission.priority" do
+    it "should be valid with default data" do
+      expect(mission).to be_valid
+    end
+    context "with invalid priority" do
+      it "should be invalid with string" do
+        expect{ build(:mission, priority: "super high")}.to raise_error(ArgumentError, /is not a valid priority/)
+      end
+      it "should be invalid with unused level" do
+        expect{ build(:mission, priority: 10)}.to raise_error(ArgumentError, /is not a valid priority/)
+      end
+
+      it "should be invalid with nil" do
+        mission = build(:mission, priority: nil)
+        expect(mission).to be_invalid
+      end
+    end
+
+    context "with #higher_priority" do
+      it "should increase from low to medium" do
+        mission = create(:mission, :low_priority)
+        expect{mission.higher_priority}.to change{ mission.priority}.from("low").to("medium")
+      end
+      it "should increase from medium to high" do
+        mission = create(:mission, :medium_priority)
+        expect{mission.higher_priority}.to change{ mission.priority}.from("medium").to("high")
+      end
+      it "should not increase when it is high" do
+        mission = create(:mission, :high_priority)
+        expect{mission.higher_priority}.not_to change{ mission.priority}
+      end
+    end
+
+    context "with #lower_priority" do
+      it "should decrease from high to medium" do
+        mission = create(:mission, :high_priority)
+        expect{ mission.lower_priority }.to change{ mission.priority }.from("high").to("medium")
+      end
+      it "should decrease from medium to low" do
+        mission = create(:mission, :medium_priority)
+        expect{ mission.lower_priority }.to change{ mission.priority }.from("medium").to("low")
+      end
+      it "should not decrease when it is low" do
+        mission = create(:mission, :low_priority)
+        expect{ mission.lower_priority }.not_to change{ mission.priority }
+      end
+    end
+
   end
 
 

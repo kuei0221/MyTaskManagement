@@ -10,11 +10,17 @@ zh-TW:
           waiting: "待處理"
           progressing: "進行中"
           completed: "已完成"
+        priority: 優先度
+        priority_level:
+          low: 低
+          medium: 中
+          high: 高
     errors:
       messages:
         mission:
           datetime_before_created: "不能比其創建日期還早"
           datetime_before_now: "不能是過去的日期"
           exist_work_state_type: "不是已使用的狀態"
+          exist_priority_level: "不是存在的優先度"
 
 

@@ -4,7 +4,7 @@
   <%= label_tag :query, t("missions.table.search.query") %>
   <%= text_field_tag :query %>
   <%= label_tag :work_state, t("missions.table.search.work_state") %>
-  <%= select_tag :work_state, options_for_select(["waiting", "progressing", "completed"]), include_blank: true %>
+  <%= select_tag :work_state, options_for_select([[t("missions.table.state_type.waiting"),"waiting"], [t("missions.table.state_type.progressing"), "progressing"], [t("missions.table.state_type.completed"), "completed"]]), include_blank: true %>
   <%= submit_tag t("missions.table.search.submit") %>
 <% end %>
 
@@ -20,11 +20,12 @@
       <th>
         <button><%= t("missions.table.work_state") %></button>
         <ul>
-          <li><%= link_to t("missions.table.work_state.waiting"), search_path(work_state: "waiting") %></li>
-          <li><%= link_to t("missions.table.work_state.progressing"), search_path(work_state: "progressing") %></li>
-          <li><%= link_to t("missions.table.work_state.completed"), search_path(work_state: "completed") %></li>
+          <li><%= link_to t("missions.table.state_type.waiting"), search_path(work_state: "waiting") %></li>
+          <li><%= link_to t("missions.table.state_type.progressing"), search_path(work_state: "progressing") %></li>
+          <li><%= link_to t("missions.table.state_type.completed"), search_path(work_state: "completed") %></li>
         </ul>
       </th>
+      <th><button onclick="Sort('priority')"><%= t("missions.table.priority")%></button></th>
       <th><%= t("missions.table.edit") %></th>
       <th><%= t("missions.table.destroy") %></th>
     </tr>
@@ -37,6 +38,7 @@
 <script>
   var created_at_button = new Object({direction: "asc"});
   var deadline_button = new Object({direction: "asc"});
+  var priority_button = new Object({direction: "asc"});
   var button;
   function Sort(column){
     CheckColumn(column);
@@ -52,6 +54,7 @@
   function CheckColumn(column){
     if(column == "deadline"){ button = deadline_button }
     if(column == "created_at"){ button = created_at_button }
+    if(column == "priority"){ button = priority_button }
   }
   function TriggerDirection(button){
     if( button.direction =="asc" ){

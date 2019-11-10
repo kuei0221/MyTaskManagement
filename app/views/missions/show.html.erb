@@ -1,6 +1,7 @@
 <h1><%= t("missions.show.title") + @mission.name %></h1>
 <h3 class="work_state"><%= t("missions.table.work_state") + ": " + t("missions.table.state_type.#{@mission.work_state}") %></h3>
-<h4><%= t("missions.table.created_at")+ ": " + @mission.created_at.to_s(:short) %></h4>
+<h3 class="priority"><%= t("missions.table.priority") + ": " + t("missions.table.priority_level.#{@mission.priority}") %></h3>
+<h4><%= t("missions.table.created_at")+ ": " + @mission.created_at.to_s(:db) %></h4>
 <% if @mission.deadline.present? %>
   <p><%= t("missions.table.deadline")+ ": " +  @mission.deadline.to_s %></p>
 <% else %>
@@ -12,13 +13,9 @@
 <%= link_to "Progress", workstate_path(@mission, state: "progress"), class: "progress_button",method: "patch", remote: true %>
 <%= link_to "Wait", workstate_path(@mission, state: "wait"), class: "wait_button", method: "patch", remote: true %>
 <%= link_to "Complete", workstate_path(@mission,  state: "complete"), class: "complete_button", method: "patch", remote: true %>
-<% if @mission.waiting? %>
-<% elsif @mission.progressing? %>
-<% end %>
 
 <%= link_to t("missions.edit_button"), edit_mission_path(@mission.id) %>
 <%= link_to t("missions.destroy_button"), mission_path(@mission.id), method: "delete", data: {confirm:  t("missions.destroy.alert")} %>
-<%= link_to t("missions.return_button"), missions_path %>
 
 
 <script>

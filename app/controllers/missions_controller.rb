@@ -55,7 +55,7 @@ class MissionsController < ApplicationController
 
   private
   def mission_params
-    params.require(:mission).permit(:name, :content)
+    params.require(:mission).permit(:name, :content, :priority)
   end
 
   def check_and_build_deadline(mission)

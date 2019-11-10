@@ -21,12 +21,18 @@
   <%= label_tag :no_deadline, t("missions.table.no_deadline") %>  
   <%= check_box_tag :no_deadline, checked_value, no_deadline %>
 
+  <%= f.label t("missions.table.priority") %>
+  <%= f.select :priority, options_for_select(
+    [
+      [ t("missions.table.priority_level.low"), "low" ],
+      [ t("missions.table.priority_level.medium"), "medium" ],
+      [ t("missions.table.priority_level.high"), "high" ]
+    ], @mission.read_attribute_before_type_cast(:priority)) %>
 
   <%= f.submit t("missions.table.update") %>
 <% end %>
 
 
-<%= link_to t("missions.return_button"), missions_path %>
 
 <script>
   $(document).on("turbolinks:load", function(){

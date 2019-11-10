@@ -19,6 +19,11 @@ en:
         waiting: Waiting
         progressing: Progressing
         completed: Completed
+      priority: Priority
+      priority_level:
+        low: Low
+        medium: Medium
+        high: High
       search:
         query: "Search Mission by Name"
         work_state: "Mission Status"

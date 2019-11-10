@@ -14,7 +14,9 @@
   <%= label_tag :no_deadline, t("missions.table.no_deadline") %>
   <%= check_box_tag :no_deadline %>
 
-  <%= f.submit t("missions.table.create") %>
-<% end %>
+  <%= f.label t("missions.table.priority") %>
+  <%= f.select :priority, [[t("missions.table.priority_level.low"), "low"], [t("missions.table.priority_level.medium"), "medium"], [t("missions.table.priority_level.high"), "high"] ] %>
 
-<%= link_to t("missions.return_button"), missions_path %>
+  <%= f.submit t("missions.table.create") %>
+
+<% end %>
