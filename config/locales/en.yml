@@ -1,9 +1,12 @@
 en:
   missions:
-    create_button: New Mission
+    create_button: Create New Mission
     edit_button: Edit Mission
     destroy_button: Delete Mission
-    return_button: Back to Missions list
+    return_button: Back to List
+    wait_button: Wait
+    progress_button: Start Progressing
+    complete_button: Complete!
     table:
       name: Name
       content: Content
@@ -16,18 +19,22 @@ en:
       no_deadline: No Deadline
       work_state: Status
       state_type:
+        all: All
         waiting: Waiting
         progressing: Progressing
         completed: Completed
       priority: Priority
       priority_level:
+        all: All
         low: Low
         medium: Medium
         high: High
       search:
-        query: "Search Mission by Name"
-        work_state: "Mission Status"
-        submit: "Search"
+        name: Name
+        work_state: Status
+        priority: Priority
+        or: OR
+        submit: Search
     index:
       title: My Task Management System
     new:

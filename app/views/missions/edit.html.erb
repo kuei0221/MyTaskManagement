@@ -1,36 +1,47 @@
-<h1><%= t("missions.edit.title")%></h1>
+<div class="row my-3">
+  <h3 class="col text-center"><%= t("missions.edit.title")%></h3>
+</div>
 
-<%= form_for(@mission, url: mission_path(@mission.id), method: "patch") do |f| %>
-  
-  <%= f.label t("missions.table.name") %>
-  <%= f.text_field :name %>
+<div class="row justify-content-center">
+  <%= form_for(@mission, url: mission_path(@mission.id), method: "patch") do |f| %>
+    <div class="form-group">
+      <%= f.label t("missions.table.name") %>
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
 
-  <%= f.label t("missions.table.content") %>
-  <%= f.text_area :content %>
+    <div class="form-group">
+      <%= f.label t("missions.table.content") %>
+      <%= f.text_area :content, class: "form-control" %>
+    </div>
 
-  <% if @mission.deadline.nil? %>
-    <% no_deadline = true %>
-    <% checked_value = 1 %>
-  <% else %>
-    <% no_deadline = false %>
-    <% checked_value = 0 %>
+    <div class="deadline form-group">
+      <% if @mission.deadline.nil? %>
+        <% no_deadline = true %>
+        <% checked_value = 1 %>
+      <% else %>
+        <% no_deadline = false %>
+        <% checked_value = 0 %>
+      <% end %>
+    
+      <%= f.label t("missions.table.deadline") %>
+      <%= select_date @mission.deadline, start_year: Date.today.year, disabled: no_deadline, prefix: :deadline, class: "form-control" %>
+      <%= label_tag :no_deadline, t("missions.table.no_deadline") %>  
+      <%= check_box_tag :no_deadline, checked_value, no_deadline %>
+    </div>
+    <div class="form-group">
+      <%= f.label t("missions.table.priority") %>
+      <%= f.select :priority, options_for_select(
+        [
+          [ t("missions.table.priority_level.low"), "low" ],
+          [ t("missions.table.priority_level.medium"), "medium" ],
+          [ t("missions.table.priority_level.high"), "high" ]
+        ], @mission.read_attribute_before_type_cast(:priority)), class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.submit t("missions.table.update"), class: " form-control btn btn-primary" %>
+    </div>
   <% end %>
-
-  <%= f.label t("missions.table.deadline") %>
-  <%= select_date @mission.deadline, start_year: Date.today.year, disabled: no_deadline, prefix: :deadline %>
-  <%= label_tag :no_deadline, t("missions.table.no_deadline") %>  
-  <%= check_box_tag :no_deadline, checked_value, no_deadline %>
-
-  <%= f.label t("missions.table.priority") %>
-  <%= f.select :priority, options_for_select(
-    [
-      [ t("missions.table.priority_level.low"), "low" ],
-      [ t("missions.table.priority_level.medium"), "medium" ],
-      [ t("missions.table.priority_level.high"), "high" ]
-    ], @mission.read_attribute_before_type_cast(:priority)) %>
-
-  <%= f.submit t("missions.table.update") %>
-<% end %>
+</div>  
 
 
 
@@ -39,7 +50,7 @@
     console.log("set disable")
     var disabled = $("#no_deadline").attr("checked") == null
     $('#no_deadline').on('click', function() {
-      $("select").prop("disabled", disabled)
+      $(".deadline select").prop("disabled", disabled)
       disabled = !disabled
     });
   })

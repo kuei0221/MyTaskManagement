@@ -10,11 +10,23 @@
   </head>
 
   <body>
-    <% show_flash %>
-    <%= yield %>
-    
-    <%= link_to t("missions.return_button"), missions_path %>
-    <%= link_to "中文版", :controller => controller_name, :action => action_name, :locale => "zh-TW" %>
-    <%= link_to "English", :controller => controller_name, :action => action_name, :locale => "en" %>
+    <div class="container">
+      <% show_flash %>
+      <%= yield %>
+    </div>
   </body>
-</html>
+
+  <footer class="footer">
+    <ul class="nav nav-tabs justify-content-end pr-5 my-5">
+      <li class="nav-item">
+        <%= link_to t("missions.return_button"), missions_path, class: "btn btn-light" %>
+      </li>    
+      <li class="nav-item">
+        <%= link_to "中文", {:controller => controller_name, :action => action_name, :locale => "zh-TW"}, class: "btn btn-light" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "English", {:controller => controller_name, :action => action_name, :locale => "en"}, class: "btn btn-light" %>
+      </li>
+    </ul>
+  </footer>
+  </html>

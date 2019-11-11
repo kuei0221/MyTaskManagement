@@ -4,6 +4,9 @@ zh-TW:
     edit_button: 修改任務
     destroy_button: 刪除任務
     return_button: 返回任務列表
+    wait_button: 暫停處理
+    progress_button: 開始處理
+    complete_button: 完成!
     table:
       name: 任務名稱
       content: 任務內容
@@ -16,17 +19,21 @@ zh-TW:
       no_deadline: 不設定結束時間
       work_state: 狀態
       state_type:
+        all: 全部
         waiting: 待處理
         progressing: 處理中
         completed: 已完成
-      priority: 優先級
+      priority: 優先度
       priority_level:
+        all: 全部
         low: 低
         medium: 中
         high: 高
       search:
-        query: 請輸入任務名稱
+        name: 任務名稱
         work_state: 任務狀態
+        priority: 優先度
+        or: 或
         submit: 搜尋
     index:
       title: 我的任務管理系統

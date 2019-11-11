@@ -9,6 +9,7 @@ class Mission < ApplicationRecord
   scope :with_deadline, ->{ where("deadline is not null") }
   scope :search_work_state, ->(state) { where("work_state = ?", work_states.dig(state)) }
   scope :search_name,-> (name) { where("name ilike ?", "%#{name}%") }
+  scope :search_priority,-> (level) { where("priority = ?", priorities.dig(level)) }
   validates :name, presence: true, length: { minimum: 8, maximum: 48 }
   validates :content, presence: true, length: {minimum: 8, maximum: 254 }
   validate :datetime_before_created, on: :update

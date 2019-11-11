@@ -22,5 +22,12 @@ zh-TW:
           datetime_before_now: "不能是過去的日期"
           exist_work_state_type: "不是已使用的狀態"
           exist_priority_level: "不是存在的優先度"
+  views:
+    pagination:
+      first: 首頁
+      previous: 上一頁
+      truncate: ...
+      next: 下一頁
+      last: 尾頁
 
 

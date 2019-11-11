@@ -20,9 +20,10 @@ RSpec.feature "mission", type: :feature do
     expect(page).to have_link(I18n.t("missions.table.created_at"))
     expect(page).to have_link(I18n.t("missions.table.deadline"))
     expect(page).to have_link(I18n.t("missions.table.work_state"))
-    expect(page).to have_field(I18n.t("missions.table.search.query"))
-    expect(page).to have_select(I18n.t("missions.table.search.work_state"))
     expect(page).to have_link(I18n.t("missions.table.priority"))
+    expect(page).to have_field(I18n.t("missions.table.search.name"))
+    expect(page).to have_select(I18n.t("missions.table.search.work_state"))
+    expect(page).to have_select(I18n.t("missions.table.search.priority"))
     expect(page).to have_css(".mission", count: 5)
     mission = all(".mission").first
     expect(mission).to have_css(".mission-name")
@@ -94,28 +95,74 @@ RSpec.feature "mission", type: :feature do
   
   scenario "with searching bar" do
     visit root_path 
-    expect(page).to have_field(I18n.t("missions.table.search.query"))
+    expect(page).to have_field(I18n.t("missions.table.search.name"))
     expect(page).to have_select(I18n.t("missions.table.search.work_state"))
-    fill_in I18n.t("missions.table.search.query"), with: "Testing"
+    fill_in I18n.t("missions.table.search.name"), with: "Testing"
     click_button I18n.t("missions.table.search.submit")
     expect(page).to have_content(mission.name)
     expect(page).to have_content(mission.content)
     expect(page).to have_content(I18n.t("missions.table.state_type.#{mission.work_state}"))
     
-    find("#search select").select(I18n.t("missions.table.state_type.waiting"))
+    find("select#work_state").select(I18n.t("missions.table.state_type.waiting"))
     click_button I18n.t("missions.table.search.submit")
     expect(page).to have_css(".mission", count: 2)
+
+    find("select#priority").select(I18n.t("missions.table.priority_level.low"))
+    click_button I18n.t("missions.table.search.submit")
+    expect(page).to have_css(".mission", count: 1)
     
-    fill_in I18n.t("missions.table.search.query"), with: "Testing"
-    find("#search select").select(I18n.t("missions.table.state_type.completed"))
+    
+    fill_in I18n.t("missions.table.search.name"), with: "Testing"
+    find("select#work_state").select(I18n.t("missions.table.state_type.completed"))
+    find("select#priority").select(I18n.t("missions.table.priority_level.low"))
     click_button I18n.t("missions.table.search.submit")
     expect(page).to have_content(mission.name)
     expect(page).to have_css(".mission", count: 1)
   end
   
+  scenario "filter" do
+    visit root_path
+    click_link I18n.t("missions.table.state_type.waiting")
+    all_state = all(".mission-work-state").map(&:text)
+    expect(all_state.uniq[0]).to eq I18n.t("missions.table.state_type.waiting")
+    click_link I18n.t("missions.table.state_type.progressing")
+    all_state = all(".mission-work-state").map(&:text)
+    expect(all_state.uniq[0]).to eq I18n.t("missions.table.state_type.progressing")
+    click_link I18n.t("missions.table.state_type.completed")
+    all_state = all(".mission-work-state").map(&:text)
+    expect(all_state.uniq[0]).to eq I18n.t("missions.table.state_type.completed")
+    
+    click_link I18n.t("missions.table.priority_level.low")
+    all_priority = all(".mission-priority").map(&:text)
+    expect(all_priority.uniq[0]).to eq I18n.t("missions.table.priority_level.low")
+    click_link I18n.t("missions.table.priority_level.medium")
+    all_priority = all(".mission-priority").map(&:text)
+    expect(all_priority.uniq[0]).to eq I18n.t("missions.table.priority_level.medium")
+    click_link I18n.t("missions.table.priority_level.high")
+    all_priority = all(".mission-priority").map(&:text)
+    expect(all_priority.uniq[0]).to eq I18n.t("missions.table.priority_level.high")
+  end
+  
+  scenario "filter and sort" do
+    visit root_path
+    click_link I18n.t("missions.table.state_type.waiting")
+    all_state = all(".mission-work-state").map(&:text)
+    expect(all_state.uniq[0]).to eq I18n.t("missions.table.state_type.waiting")
+    all_datetime = all(".mission-created-at").map(&:text).map(&:to_datetime)
+    expect(all_datetime[0]).to be < all_datetime[1]
+    click_link I18n.t("missions.table.created_at")
+    click_link I18n.t("missions.table.created_at")
+    expect(page).to have_css(".mission", count: 2)
+    all_datetime = all(".mission-created-at").map(&:text).map(&:to_datetime)
+    expect(all_datetime[0]).to be > all_datetime[1]
+    all_state = all(".mission-work-state").map(&:text)
+    expect(all_state.uniq[0]).to eq I18n.t("missions.table.state_type.waiting")
+    
+  end
+  
   scenario "search and sort" do
     visit root_path
-    find("#search select").select(I18n.t("missions.table.state_type.waiting"))
+    find("select#work_state").select(I18n.t("missions.table.state_type.waiting"))
     click_button I18n.t("missions.table.search.submit")
     expect(page).to have_css(".mission", count: 2)
     all_datetime = all(".mission-created-at").map(&:text).map(&:to_datetime)
@@ -137,7 +184,7 @@ RSpec.feature "mission", type: :feature do
     expect(page).to have_current_path mission_path(mission.id)
     expect(page).to have_content(mission.name)
     expect(page).to have_content(mission.content)
-    expect(page).to have_content(mission.created_at.to_s(:db))
+    expect(page).to have_content(mission.created_at.strftime("%Y-%m-%d"))
     expect(page).to have_content(mission.deadline.to_s)
     expect(page).to have_content(I18n.t("missions.table.priority_level.#{mission.priority}"))
     expect(page).to have_content(I18n.t("missions.table.state_type.#{mission.work_state}"))
@@ -151,7 +198,7 @@ RSpec.feature "mission", type: :feature do
     expect(page).to have_current_path mission_path(mission.id)
     expect(page).to have_content(mission.name)
     expect(page).to have_content(mission.content)
-    expect(page).to have_content(mission.created_at.to_s(:db))
+    expect(page).to have_content(mission.created_at.strftime("%Y-%m-%d"))
     expect(page).to have_content(I18n.t("missions.table.priority_level.#{mission.priority}"))
     expect(page).to have_content(I18n.t("missions.table.state_type.#{mission.work_state}"))
     expect(page).to have_content(I18n.t("missions.table.no_deadline"))

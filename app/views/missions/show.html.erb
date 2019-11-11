@@ -1,22 +1,30 @@
-<h1><%= t("missions.show.title") + @mission.name %></h1>
-<h3 class="work_state"><%= t("missions.table.work_state") + ": " + t("missions.table.state_type.#{@mission.work_state}") %></h3>
-<h3 class="priority"><%= t("missions.table.priority") + ": " + t("missions.table.priority_level.#{@mission.priority}") %></h3>
-<h4><%= t("missions.table.created_at")+ ": " + @mission.created_at.to_s(:db) %></h4>
-<% if @mission.deadline.present? %>
-  <p><%= t("missions.table.deadline")+ ": " +  @mission.deadline.to_s %></p>
-<% else %>
-  <p><%= t("missions.table.deadline")+ ": " +  t("missions.table.no_deadline") %></p>
-<% end %>
-
-<p><%= @mission.content %></p>
-
-<%= link_to "Progress", workstate_path(@mission, state: "progress"), class: "progress_button",method: "patch", remote: true %>
-<%= link_to "Wait", workstate_path(@mission, state: "wait"), class: "wait_button", method: "patch", remote: true %>
-<%= link_to "Complete", workstate_path(@mission,  state: "complete"), class: "complete_button", method: "patch", remote: true %>
-
-<%= link_to t("missions.edit_button"), edit_mission_path(@mission.id) %>
-<%= link_to t("missions.destroy_button"), mission_path(@mission.id), method: "delete", data: {confirm:  t("missions.destroy.alert")} %>
-
+<div class="row justify-content-center">
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title"><%= t("missions.show.title") + @mission.name %></h3>
+      <div class="pb-2"><h5 class="created_at card-subtitle text-muted"><%= t("missions.table.created_at")+ ": " + @mission.created_at.strftime("%Y-%m-%d") %></h5></div>
+      <div class="pb-2">
+        <% if @mission.deadline.present? %>
+          <h5 class="deadline card-subtitle text-muted"><%= t("missions.table.deadline")+ ": " +  @mission.deadline.to_s %></h5>
+        <% else %>
+          <h5 class="nodeadline card-subtitle text-muted"><%= t("missions.table.deadline")+ ": " +  t("missions.table.no_deadline") %></h5>
+        <% end %>
+      </div>
+      <div class="pb-2"><h5 class="work_state card-subtitle text-muted"><%= t("missions.table.work_state") + ": " + t("missions.table.state_type.#{@mission.work_state}") %></h5></div>
+      <div class="pb-2"><h5 class="priority card-subtitle text-muted"><%= t("missions.table.priority") + ": " + t("missions.table.priority_level.#{@mission.priority}") %></h5></div>
+    </div>
+    <div class="card-body">
+      <p class="card-text"><%= @mission.content %></p>
+    </div>
+    <div class="card-footer">
+      <%= link_to t("missions.progress_button"), workstate_path(@mission, state: "progress"), class: "progress_button btn btn-primary ",method: "patch", remote: true %>
+      <%= link_to t("missions.wait_button"), workstate_path(@mission, state: "wait"), class: "wait_button btn btn-warning", method: "patch", remote: true %>
+      <%= link_to t("missions.complete_button"), workstate_path(@mission,  state: "complete"), class: "complete_button btn btn-success", method: "patch", remote: true %>
+      <%= link_to t("missions.edit_button"), edit_mission_path(@mission.id), class: "btn btn-info"%>
+      <%= link_to t("missions.destroy_button"), mission_path(@mission.id), method: "delete", data: {confirm:  t("missions.destroy.alert")}, class: "btn btn-danger" %>
+    </div>
+  </div>
+</div>
 
 <script>
 
