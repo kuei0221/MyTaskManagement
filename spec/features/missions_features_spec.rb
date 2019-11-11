@@ -2,12 +2,12 @@ require "rails_helper"
 
 RSpec.feature "mission", type: :feature do
   before do
-    create_list(:mission, 2, :waiting)
-    create_list(:mission, 2, :progressing)
+    create_list(:mission, 2, :waiting, :medium_priority)
+    create_list(:mission, 2, :progressing, :high_priority)
     # page.driver.header 'Accept-Language', locale
     # I18n.locale = locale
   end
-  let!(:mission) {create(:mission, :completed, name: "testing example")}
+  let!(:mission) {create(:mission, :completed, :low_priority, name: "testing example")}
   # let(:locale) { :en }
 
   scenario "with mission list" do
@@ -17,12 +17,12 @@ RSpec.feature "mission", type: :feature do
     expect(page).to have_css("#missions_table")
     expect(page).to have_content(I18n.t("missions.table.name"))
     expect(page).to have_content(I18n.t("missions.table.content"))
-    expect(page).to have_button(I18n.t("missions.table.created_at"))
-    expect(page).to have_button(I18n.t("missions.table.deadline"))
-    expect(page).to have_button(I18n.t("missions.table.work_state"))
+    expect(page).to have_link(I18n.t("missions.table.created_at"))
+    expect(page).to have_link(I18n.t("missions.table.deadline"))
+    expect(page).to have_link(I18n.t("missions.table.work_state"))
     expect(page).to have_field(I18n.t("missions.table.search.query"))
     expect(page).to have_select(I18n.t("missions.table.search.work_state"))
-    expect(page).to have_button(I18n.t("missions.table.priority"))
+    expect(page).to have_link(I18n.t("missions.table.priority"))
     expect(page).to have_css(".mission", count: 5)
     mission = all(".mission").first
     expect(mission).to have_css(".mission-name")
@@ -37,19 +37,59 @@ RSpec.feature "mission", type: :feature do
   
   scenario "with sorting button in mission list" do
     visit root_path
-    expect(page).to have_button(I18n.t("missions.table.created_at"))
-    expect(page).to have_button(I18n.t("missions.table.deadline"))
+    expect(page).to have_link(I18n.t("missions.table.created_at"))
+    expect(page).to have_link(I18n.t("missions.table.deadline"))
+    expect(page).to have_link(I18n.t("missions.table.work_state"))
+    expect(page).to have_link(I18n.t("missions.table.priority"))
     all_datetime = all(".mission-created-at").map(&:text).map(&:to_datetime)
     expect(all_datetime[0]).to be < all_datetime[1]
-    # click_button I18n.t("missions.table.created_at")
-    # all_datetime = all(".mission-created-at").map(&:text).map(&:to_datetime)
-    # expect(all_datetime[0]).to be > all_datetime[1]
-    # click_button I18n.t("missions.table.created_at")
-    # all_datetime = all(".mission-created-at").map(&:text).map(&:to_datetime)
-    # expect(all_datetime[0]).to be < all_datetime[1]
-    # click_button I18n.t("missions.table.deadline")
-    # all_datetime = all(".mission-deadline").map(&:text).map(&:to_datetime)
-    # expect(all_datetime[0]).to be < all_datetime[1]
+
+    # All sort button default direction is "asc", and if no sorting, data is sort by created time in asc
+    # So to desc at created need to press twice
+    click_link I18n.t("missions.table.created_at")
+    click_link I18n.t("missions.table.created_at")
+    all_datetime = all(".mission-created-at").map(&:text).map(&:to_datetime)
+    expect(all_datetime[0]).to be > all_datetime[1]
+    click_link I18n.t("missions.table.created_at")
+    all_datetime = all(".mission-created-at").map(&:text).map(&:to_datetime)
+    expect(all_datetime[0]).to be < all_datetime[1]
+    
+    click_link I18n.t("missions.table.deadline")
+    all_datetime = all(".mission-deadline").map(&:text).map(&:to_datetime)
+    expect(all_datetime[0]).to be < all_datetime[1]
+    click_link I18n.t("missions.table.deadline")
+    all_datetime = all(".mission-deadline").map(&:text).map(&:to_datetime)
+    expect(all_datetime[0]).to be > all_datetime[1]
+    click_link I18n.t("missions.table.deadline")
+    all_datetime = all(".mission-deadline").map(&:text).map(&:to_datetime)
+    expect(all_datetime[0]).to be < all_datetime[1]
+    
+    click_link I18n.t("missions.table.work_state")
+    all_state = all(".mission-work-state").map(&:text)
+    expect(all_state[0]).to eq I18n.t(".missions.table.state_type.waiting")
+    expect(all_state[4]).to eq I18n.t(".missions.table.state_type.completed")
+    click_link I18n.t("missions.table.work_state")
+    all_state = all(".mission-work-state").map(&:text)
+    expect(all_state[4]).to eq I18n.t(".missions.table.state_type.waiting")
+    expect(all_state[0]).to eq I18n.t(".missions.table.state_type.completed")
+    click_link I18n.t("missions.table.work_state")
+    all_state = all(".mission-work-state").map(&:text)
+    expect(all_state[0]).to eq I18n.t(".missions.table.state_type.waiting")
+    expect(all_state[4]).to eq I18n.t(".missions.table.state_type.completed")
+    
+    click_link I18n.t("missions.table.priority")
+    all_priority = all(".mission-priority").map(&:text)
+    expect(all_priority[0]).to eq I18n.t(".missions.table.priority_level.low")
+    expect(all_priority[4]).to eq I18n.t(".missions.table.priority_level.high")
+    click_link I18n.t("missions.table.priority")
+    all_priority = all(".mission-priority").map(&:text)
+    expect(all_priority[4]).to eq I18n.t(".missions.table.priority_level.low")
+    expect(all_priority[0]).to eq I18n.t(".missions.table.priority_level.high")
+    click_link I18n.t("missions.table.priority")
+    all_priority = all(".mission-priority").map(&:text)
+    expect(all_priority[0]).to eq I18n.t(".missions.table.priority_level.low")
+    expect(all_priority[4]).to eq I18n.t(".missions.table.priority_level.high")
+
   end
   
   scenario "with searching bar" do
@@ -65,12 +105,31 @@ RSpec.feature "mission", type: :feature do
     find("#search select").select(I18n.t("missions.table.state_type.waiting"))
     click_button I18n.t("missions.table.search.submit")
     expect(page).to have_css(".mission", count: 2)
-
+    
     fill_in I18n.t("missions.table.search.query"), with: "Testing"
     find("#search select").select(I18n.t("missions.table.state_type.completed"))
     click_button I18n.t("missions.table.search.submit")
     expect(page).to have_content(mission.name)
     expect(page).to have_css(".mission", count: 1)
+  end
+  
+  scenario "search and sort" do
+    visit root_path
+    find("#search select").select(I18n.t("missions.table.state_type.waiting"))
+    click_button I18n.t("missions.table.search.submit")
+    expect(page).to have_css(".mission", count: 2)
+    all_datetime = all(".mission-created-at").map(&:text).map(&:to_datetime)
+    expect(all_datetime[0]).to be < all_datetime[1]
+
+    click_link I18n.t("missions.table.created_at")
+    click_link I18n.t("missions.table.created_at")
+    expect(page).to have_css(".mission", count: 2)
+    all_datetime = all(".mission-created-at").map(&:text).map(&:to_datetime)
+    expect(all_datetime[0]).to be > all_datetime[1]
+    click_link I18n.t("missions.table.created_at")
+    expect(page).to have_css(".mission", count: 2)
+    all_datetime = all(".mission-created-at").map(&:text).map(&:to_datetime)
+    expect(all_datetime[0]).to be < all_datetime[1]
   end
   
   scenario "when viewing mission with deadline" do

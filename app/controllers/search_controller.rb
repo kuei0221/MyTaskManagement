@@ -1,25 +1,23 @@
 class SearchController < ApplicationController
 
   def index
-    name = params[:query]
-    work_state = params[:work_state]
-    if name.present? && work_state.present?
-      @missions = Mission.search_by_state_and_name(params[:work_state], params[:query]).order_by_created_at(:asc)
-    end
-
-    if params[:query].present? && params[:work_state].blank?
-      @missions = Mission.search_by_name(params[:query]).order_by_created_at(:asc)
-    end
-
-    if params[:query].blank? && params[:work_state].present?
-      @missions = Mission.search_by_work_state(params[:work_state]).order_by_created_at(:asc)
-    end
+    sort = params[:sort]
+    direction = params[:direction]
+    
+    @missions = Mission.filter(filtering_params)
+    @missions = sort.present? && direction.present? ? @missions.order_by_column(sort, direction) : @missions.order_by_created_at(:asc)
+    @missions = @missions.page(params[:page])
 
     if @missions.blank?
       flash.now[:alert] = t("search.index.alert")
     end
 
     render template: "missions/index"
+  end
+
+  private
+  def filtering_params
+    params.slice(:name, :work_state)
   end
 
 end

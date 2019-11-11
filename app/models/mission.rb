@@ -1,13 +1,14 @@
 class Mission < ApplicationRecord
+  include Filterable
+  paginates_per 10
   enum priority: %w[ low medium high ]
   enum work_state: %w[ waiting progressing completed ]
   scope :order_by_created_at, ->(direction) { order(created_at: direction) }
   scope :order_by_column, ->(column, direction) { order(column => direction) }
   scope :no_deadline, ->{ where("deadline is null") }
   scope :with_deadline, ->{ where("deadline is not null") }
-  scope :search_by_work_state, ->(state) { where("work_state = ?", work_states.dig(state)) }
-  scope :search_by_name,-> (name) { where("name ilike ?", "%#{name}%") }
-  scope :search_by_state_and_name, ->(state, name) { where("work_state = ? and name ilike ?", work_states.dig(state), "%#{name}%")}
+  scope :search_work_state, ->(state) { where("work_state = ?", work_states.dig(state)) }
+  scope :search_name,-> (name) { where("name ilike ?", "%#{name}%") }
   validates :name, presence: true, length: { minimum: 8, maximum: 48 }
   validates :content, presence: true, length: {minimum: 8, maximum: 254 }
   validate :datetime_before_created, on: :update

@@ -1,7 +1,7 @@
 class MissionsController < ApplicationController
 
   def index
-    @missions = Mission.order_by_created_at(:asc)
+    @missions = Mission.page(params[:page]).order_by_created_at(:asc)
   end
 
   def new
