@@ -1,7 +1,7 @@
 require "factory_bot_rails"
 
 i = 0
-while true, i=0 do
+while true do
   user = FactoryBot.create(:user)
   missions = Mission.where(user_id: nil).page(i)
   if missions.present?
