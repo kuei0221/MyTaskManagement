@@ -1,0 +1,12 @@
+en:
+  users:
+    new:
+      title: Sign up as New User
+      name: name
+      email: Email
+      password: Password
+      password_confirmation: Password Confirmation
+      submit: Sign up !
+    create:
+      success: "You have successfully sign up new account !"
+      alert: "Opps. Something wrong when sign up."

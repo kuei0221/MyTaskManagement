@@ -1,0 +1,62 @@
+en:
+  missions:
+    create_button: Create New Mission
+    edit_button: Edit Mission
+    destroy_button: Delete Mission
+    return_button: Back to List
+    wait_button: Wait
+    progress_button: Start Progressing
+    complete_button: Complete!
+    table:
+      name: Name
+      content: Content
+      create: Create
+      created_at: Created at
+      update: Update
+      edit: Edit
+      destroy: Destroy
+      deadline: Deadline
+      no_deadline: No Deadline
+      work_state: Status
+      state_type:
+        all: All
+        waiting: Waiting
+        progressing: Progressing
+        completed: Completed
+      priority: Priority
+      priority_level:
+        all: All
+        low: Low
+        medium: Medium
+        high: High
+      search:
+        name: Name
+        work_state: Status
+        priority: Priority
+        or: OR
+        submit: Search
+    index:
+      title: My Task Management System
+    new:
+      title: Create New Mission
+    create: 
+      success: Create New Mission Success.
+      fail: Error Occurred when Creating New Mission.
+    show:
+      title: "Mission: "
+      fail: Cannot find this mission.
+    edit:
+      title: Edit this Mission
+    update:
+      success: Update Success.
+      fail: Error Occurred when Updating Mission.
+    destroy:
+      alert: Are you sure you want to delete this mission?
+      success: Delete Mission Success!
+      fail: Error Occurred when Deleting Mission
+  search:
+    index:
+      alert: No Mission found
+  sorts:
+    index:
+      alert: Cannot Sort the column 

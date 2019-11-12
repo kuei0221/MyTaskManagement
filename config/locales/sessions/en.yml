@@ -1,0 +1,19 @@
+en:
+  sessions:
+    only_login:
+      alert: "You have not login Yet. Please Login first."
+    only_not_login:
+      alert: "You had login already. Now Redirect you to the home page."
+    new:
+      title: Login
+      email: Email
+      password: Password
+      submit: Sign in!
+      divider: ------Haven't Sign up Yet ?------
+      signup: Sign up!
+    create:
+      success: Successfully Login.
+      alert: Login Fail!
+    destroy:
+      success: Successfully Logout.
+      alert: Logout Fail!

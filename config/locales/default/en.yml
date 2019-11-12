@@ -1,0 +1,34 @@
+en:
+  activerecord:
+    attributes:
+      mission:
+        name: Name
+        content: Content
+        deadline: Deadline
+        work_state: Work State
+        state_type:
+          waiting: Waiting
+          progressing: Progressing
+          completed: Completed
+        priority: Priority
+        priority_level:
+          low: Low
+          medium: Medium
+          high: High
+    errors:
+      messages:
+        mission:
+          datetime_before_created: "can not be earlier than it is created"
+          datetime_before_now: "can not be earlier than now"
+          exist_work_state_type: "is not a exist type"
+          exist_priority_level: "is not a exist priority level"
+  views:
+    header:
+      login: Login
+      logout: Logout
+    pagination:
+      first: First
+      previous: previous 
+      truncate: ...
+      next: next
+      last: Last

@@ -1,0 +1,9 @@
+<tr class="mission" id="mission-<%= mission.id %>">
+  <th scope="row"><%= mission.id %></th>
+  <td class="mission-name"><%= link_to mission.name, mission_path(mission.id) %></td>
+  <td class="mission-content text-truncate" style="max-width: 350px;"><%= mission.content %></td>
+  <td class="mission-created-at text-center"><%= mission.created_at.strftime("%Y-%m-%d") %> </td>
+  <td class="mission-deadline  text-center"><%= mission.deadline.present? ? mission.deadline : t("missions.table.no_deadline") %> </td>
+  <td class="mission-work-state text-center"><%= t("missions.table.state_type.#{mission.work_state}") %> </td>
+  <td class="mission-priority text-center"><%= t("missions.table.priority_level.#{mission.priority}") %> </td>
+</tr>

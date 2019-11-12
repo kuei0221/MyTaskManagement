@@ -1,0 +1,12 @@
+zh-TW:
+  users:
+    new:
+      title: 來成為新會員吧!
+      name: 名稱
+      email: 信箱
+      password: 密碼
+      password_confirmation: 確認密碼
+      submit: 註冊!
+    create:
+      success: 你已成功註冊成為新會員!
+      alert: 有錯誤發生，註冊失敗。

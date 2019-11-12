@@ -1,0 +1,20 @@
+<% if @mission.waiting? %>
+  $(".wait_button").hide();
+  $(".progress_button").show();
+  $(".complete_button").hide();
+<% end %>
+  
+<% if @mission.progressing? %>
+  $(".wait_button").show();
+  $(".progress_button").hide();
+  $(".complete_button").show();
+<% end %>
+  
+<% if @mission.completed? %>
+  $(".wait_button").hide();
+  $(".progress_button").hide();
+  $(".complete_button").hide();
+<% end %>
+  
+$(".work_state").text(" <%= t("missions.table.work_state") + ": " + t("missions.table.state_type.#{@mission.work_state}") %> ")
+  
