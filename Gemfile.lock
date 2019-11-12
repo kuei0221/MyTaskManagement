@@ -236,7 +236,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+<<<<<<< HEAD
   bcrypt (~> 3.1.7)
+=======
+>>>>>>> 9673d253983a17637aab563bcdfa1ecd11bf92dd
   bootsnap (>= 1.4.2)
   byebug
   capybara
