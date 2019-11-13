@@ -15,3 +15,5 @@ end
 10.times do
   FactoryBot.create(:user_with_missions, missions_count: rand(1..100))
 end
+
+user = FactoryBot.create(:user_with_missions, email: "testing@email.com", missions_count: 50, name: "testing_user")

@@ -4,6 +4,13 @@ class SessionsController < ApplicationController
   
   def new
   end
+  # this route only for testing, will login auto with test account
+  def test
+    user = User.find_by(email: "testing@email.com")
+    login user
+    flash[:success] = t("sessions.create.success")
+    redirect_to root_path
+  end
 
   def create
     user = User.find_by(email: login_params[:email])
