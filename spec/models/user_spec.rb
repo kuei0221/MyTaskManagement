@@ -5,6 +5,8 @@ RSpec.describe User, type: :model do
   
   it "shoul be valid with factory example" do
     expect(user).to be_valid
+    expect(user.save).to be true
+    expect(user).to be_valid
   end
   
   context "with user.name" do

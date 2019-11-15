@@ -1,6 +1,6 @@
 class Mission < ApplicationRecord
   include Filterable
-  belongs_to :user
+  belongs_to :user, counter_cache: true
   paginates_per 10
   enum priority: %w[ low medium high ]
   enum work_state: %w[ waiting progressing completed ]

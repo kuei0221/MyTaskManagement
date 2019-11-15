@@ -12,7 +12,7 @@
     <ul class="nav nav-tabs justify-content-end pr-5 my-3">
       <li class="nav-item mx-3">
         <% if login? && current_user.admin? %>
-          <%= link_to t("views.header.admin_user.root"), admin_root_path, class: "btn btn-info" %>
+          <%= link_to t("views.header.normal_user.root"), root_path, class: "btn btn-info" %>
         <% end %>
       </li>
       <li class="nav-item">
@@ -34,7 +34,7 @@
   <footer class="footer">
     <ul class="nav nav-tabs justify-content-end pr-5 my-3">
       <li class="nav-item">
-        <%= link_to t("missions.return_button"), missions_path, class: "btn btn-light" %>
+        <%= link_to t("missions.return_button"), admin_users_path, class: "btn btn-light" %>
       </li>    
       <li class="nav-item">
         <%= link_to "中文", {:controller => controller_name, :action => action_name, :locale => "zh-TW"}, class: "btn btn-light" %>
