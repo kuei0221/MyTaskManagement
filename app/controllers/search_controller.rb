@@ -1,10 +1,9 @@
 class SearchController < ApplicationController
+  
   before_action :only_login
   def index
-    sort = params[:sort]
-    direction = params[:direction]
-    @missions = Mission.filter(filtering_params).where(user_id: current_user.id )
-    @missions = sort.present? && direction.present? ? @missions.order_by_column(sort, direction) : @missions.order_by_created_at(:asc)
+    @missions = Mission.filter(params).where(user_id: current_user.id )
+    @missions = params[:sort].present? && params[:direction].present? ? @missions.order_by_column(params[:sort], params[:direction]) : @missions.order_by_created_at(:asc)
     @missions = @missions.page(params[:page])
 
     if @missions.blank?
@@ -12,12 +11,6 @@ class SearchController < ApplicationController
     end
 
     render template: "missions/index"
-  end
-
-  private
-
-  def filtering_params
-    params.slice(:name, :work_state, :priority)
   end
 
 end

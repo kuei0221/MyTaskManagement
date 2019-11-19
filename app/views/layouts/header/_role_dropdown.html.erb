@@ -1,0 +1,8 @@
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Role
+  </a>
+  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <%= link_to t("views.header.admin_user.switch_user"), admin_role_path(current_user), method: "patch", class: "dropdown-item" %>
+  </div>
+</li>

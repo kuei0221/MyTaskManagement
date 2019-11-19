@@ -4,41 +4,9 @@
 
 <%= link_to "new admin user ", new_admin_user_path %>
 
-<nav class="navbar navbar-light bg-dark my-3">
-  <%= form_tag search_path, id: "search", method: "get", class: "form-inline" do %>
-    <%= hidden_field_tag :locale, params[:locale]%>
-    <div class="input-group pr-3">
-      <div class="input-group-prepend">
-        <%= label_tag :name, t("missions.table.search.name"), class: "input-group-text" %>
-      </div>
-      <%= text_field_tag :name, nil, class: "form-control" %>
-    </div>
-    
-    <div class="input-group pr-3">
-      <div class="input-group-prepend">
-        <%= label_tag :work_state, t("missions.table.search.work_state"), class: "input-group-text" %>
-      </div>
-      <%= select_tag :work_state, options_for_select([[t("missions.table.state_type.waiting"),"waiting"], [t("missions.table.state_type.progressing"), "progressing"], [t("missions.table.state_type.completed"), "completed"]]), include_blank: true, class: "form-control" %>
-    </div>
-    
-    <div class="input-group pr-3">
-      <div class="input-group-prepend">
-        <%= label_tag :priority, t("missions.table.search.priority"), class: "input-group-text" %>
-      </div>
-      <%= select_tag :priority, options_for_select([[t("missions.table.priority_level.low"), "low"], [t("missions.table.priority_level.medium"), "medium"], [t("missions.table.priority_level.high"), "high"]]), include_blank: true, class: "form-control" %>
-    </div>
-    
-    <div class="input-group pr-3">
-      <%= submit_tag t("missions.table.search.submit"), class: "btn btn-success" %>
-    </div>
-
-    <span class="navbar-text text-white pr-3"><%= t("missions.table.search.or")%></span>
-    
-    <div class="input-group">
-      <%= link_to t("missions.create_button"), new_mission_path, class: "btn btn-primary form-control" %>
-    </div>
-  <% end %>
-</nav>
+<%= provide(:path, search_path) %>
+<%= provide(:role, "normal") %>
+<%= render "missions/mission_search_bar" %>
   
 
 <%= paginate @missions %>
@@ -48,11 +16,11 @@
       <th scope="col" class="text-nowrap">#</th>
       <th scope="col" class="text-nowrap"><%= t("missions.table.name") %></th>
       <th scope="col" class="text-nowrap"><%= t("missions.table.content") %></th>
-      <th scope="col" class="text-nowrap"> <%= sortable("created_at") %></th>
-      <th scope="col" class="text-nowrap"><%= sortable("deadline") %></th>
+      <th scope="col" class="text-nowrap"> <%= sortable(Mission, "created_at") %></th>
+      <th scope="col" class="text-nowrap"><%= sortable(Mission, "deadline") %></th>
       <th scope="col" class="text-nowrap">
         <div class="btn-group">
-          <%= sortable("work_state") %>
+          <%= sortable(Mission, "work_state") %>
           <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" id="dropdownMenuReference" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-reference="parent">
             <span class="sr-only">Toggle Dropdown</span>
           </button>
@@ -66,7 +34,7 @@
       </th>
       <th scope="col" class="text-nowrap">
         <div class="btn-group">
-          <%= sortable("priority") %>
+          <%= sortable(Mission, "priority") %>
           <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" id="dropdownMenuReference" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-reference="parent">
               <span class="sr-only">Toggle Dropdown</span>
           </button>

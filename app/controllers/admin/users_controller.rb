@@ -23,15 +23,15 @@ class Admin::UsersController < Admin::ApplicationController
     end
   end
 
-  def show
-    @user = User.find_by id: params[:id]
-    if @user 
-      @missions = @user.missions.page params[:page]
-    else
-      flash[:alert] = ""
-      redirect_to admin_users_path
-    end
-  end
+  # def show
+  #   @user = User.find_by id: params[:id]
+  #   if @user 
+  #     @missions = @user.missions.page params[:page]
+  #   else
+  #     flash[:alert] = ""
+  #     redirect_to admin_users_path
+  #   end
+  # end
 
   def destroy
     user = User.find_by id: params[:id]

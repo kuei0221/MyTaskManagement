@@ -1,9 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  let!(:admin_user) { create(:user, :admin) }
   let!(:user) { create(:user) }
   
-  it "shoul be valid with factory example" do
+  it "should be valid with factory example" do
     expect(user).to be_valid
     expect(user.save).to be true
     expect(user).to be_valid

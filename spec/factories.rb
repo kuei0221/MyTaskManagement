@@ -2,8 +2,14 @@ FactoryBot.define do
   factory :user do
     name { Faker::Name.unique.name }
     email { Faker::Internet.unique.email }
+    admin {false}
+    role {"normal"}
     password {"password"}
     password_confirmation {"password"}
+
+    trait :admin do
+      admin {true}
+    end
 
     factory :user_with_missions do
       transient do

@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   namespace :admin do
     root "users#index"
     resources :users
-    get "/search", to: "search#index", as: "search"
+    resources :missions
+    resources :roles, only: [:update]
+    get "/search/:model", to: "search#index", as: "search"
   end
   get "/login", to: "sessions#new", as: "login"
   get "/logout", to: "sessions#destroy", as: "logout"

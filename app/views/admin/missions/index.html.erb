@@ -1,18 +1,10 @@
-<div>
-  <h3>
-    <%= @user.name%>
-  </h3>
-</div>
-<div>
-  <h5>
-    <%= @user.email%>
-  </h5>
-</div>
-<div>
-  <h5>
-    <%= @user.missions_count %>
-  </h5>
-</div>
+<%= provide(:path, admin_search_path(model: Mission)) %>
+<%= provide(:role, "admin") %>
+
+<%= @user.name if @user.present? %>
+
+<%= render "missions/mission_search_bar" %>
+
 
 <%= paginate @missions %>
 <table id="missions_table" class="table">

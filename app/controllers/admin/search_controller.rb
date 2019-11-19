@@ -1,23 +1,23 @@
 class Admin::SearchController < Admin::ApplicationController
-  
   def index
-    sort = params[:sort]
-    direction = params[:direction]
-    @missions = Mission.filter(filtering_params).where(user_id: current_user.id )
-    @missions = sort.present? && direction.present? ? @missions.order_by_column(sort, direction) : @missions.order_by_created_at(:asc)
-    @missions = @missions.page(params[:page])
-
-    if @missions.blank?
-      flash.now[:alert] = t("search.index.alert")
+    if ["Mission", "User"].include? params[:model]
+      @collection = ActiveRecord.const_get params[:model]
+      @collection = @collection.filter params
+      @collection = params[:sort].present? && params[:direction].present? ? @collection.order_by_column(params[:sort], params[:direction]) : @collection.order_by_created_at(:asc)
+      @collection = @collection.page params[:page]
+      case params[:model]
+      when "User"
+        @users = @collection
+        render template: "admin/users/index"
+      when "Mission"
+        @missions = @collection
+        @user = User.find_by(id: params[:user_id]) if params[:user_id].present?
+        render template: "admin/missions/index"
+      end
+    else
+      flash[:alert] = ""
+      redirect_to admin_root_path
     end
-
-    render template: "missions/index"
-  end
-
-  private
-
-  def filtering_params
-    params.slice(:name, :work_state, :priority)
   end
 
 end

@@ -1,5 +1,6 @@
 class Mission < ApplicationRecord
   include Filterable
+  filterable :name, :work_state, :priority, :user_id
   belongs_to :user, counter_cache: true
   paginates_per 10
   enum priority: %w[ low medium high ]
@@ -11,6 +12,7 @@ class Mission < ApplicationRecord
   scope :search_work_state, ->(state) { where("work_state = ?", work_states.dig(state)) }
   scope :search_name,-> (name) { where("name ilike ?", "%#{name}%") }
   scope :search_priority,-> (level) { where("priority = ?", priorities.dig(level)) }
+  scope :search_user_id, ->(id) { where(user_id: id)}
   validates :name, presence: true, length: { minimum: 8, maximum: 48 }
   validates :content, presence: true, length: {minimum: 8, maximum: 254 }
   validate :datetime_before_created, on: :update

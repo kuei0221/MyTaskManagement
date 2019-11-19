@@ -9,20 +9,8 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <header class="header">
-    <ul class="nav nav-tabs justify-content-end pr-5 my-3">
-      <li class="nav-item mx-3">
-        <% if login? && current_user.admin? %>
-          <%= link_to t("views.header.normal_user.root"), root_path, class: "btn btn-info" %>
-        <% end %>
-      </li>
-      <li class="nav-item">
-        <% if login? %>
-          <%= link_to t("views.header.logout"), logout_path, class: "btn btn-danger" %>
-        <% else %>
-          <%= link_to t("views.header.login"), login_path, class: "btn btn-success" %>
-        <% end %>
-      </li>    
-    </ul>
+    <%= provide(:header, "admin_header")%>
+    <%= render "layouts/header/header" %>
   </header>
   <body>
     <div class="container">
