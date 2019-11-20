@@ -3,7 +3,7 @@ class Admin::SearchController < Admin::ApplicationController
     if ["Mission", "User"].include? params[:model]
       @collection = ActiveRecord.const_get params[:model]
       @collection = @collection.filter params
-      @collection = params[:sort].present? && params[:direction].present? ? @collection.order_by_column(params[:sort], params[:direction]) : @collection.order_by_created_at(:asc)
+      @collection = params[:sort].present? && params[:direction].present? ? @collection.order_by_column(params[:sort], params[:direction]) : @collection.order_by_column(:created_at, :asc)
       @collection = @collection.page params[:page]
       case params[:model]
       when "User"

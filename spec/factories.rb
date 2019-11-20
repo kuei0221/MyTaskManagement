@@ -11,6 +11,14 @@ FactoryBot.define do
       admin {true}
     end
 
+    trait :normal do
+      role {"normal"}
+    end
+
+    trait :administrator do
+      role {"administrator"}
+    end
+
     factory :user_with_missions do
       transient do
         missions_count {10}

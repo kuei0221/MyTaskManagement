@@ -5,7 +5,6 @@ class Mission < ApplicationRecord
   paginates_per 10
   enum priority: %w[ low medium high ]
   enum work_state: %w[ waiting progressing completed ]
-  scope :order_by_created_at, ->(direction) { order(created_at: direction) }
   scope :order_by_column, ->(column, direction) { order(column => direction) }
   scope :no_deadline, ->{ where("deadline is null") }
   scope :with_deadline, ->{ where("deadline is not null") }

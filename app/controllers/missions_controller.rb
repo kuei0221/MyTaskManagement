@@ -2,7 +2,7 @@ class MissionsController < ApplicationController
   before_action :only_login
 
   def index
-    @missions = current_user.missions.page(params[:page]).order_by_created_at(:asc)
+    @missions = current_user.missions.page(params[:page]).order_by_column(:created_at, :asc)
   end
 
   def new

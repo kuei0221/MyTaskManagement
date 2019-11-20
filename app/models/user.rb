@@ -10,15 +10,15 @@ class User < ApplicationRecord
   scope :search_name, ->(name){ where("NAME ILIKE ?", "%#{name}%") }
   scope :search_email, ->(email){ where("EMAIL ILIKE ?", "%#{email.downcase}%") }
   scope :search_admin, ->(boolean){ where(admin: boolean) }
-  scope :order_by_created_at, ->(direction) { order(created_at: direction) }
   scope :order_by_column, ->(column, direction) { order(column => direction) }
 
   before_save :downcase_email
+  after_validation :administrator_only_for_admin
   before_destroy :cannot_destroy_last_admin
   before_update :cannot_downgrade_last_admin
   has_many :missions, dependent: :destroy
 
-  def switch_user
+  def switch_role
     if admin?
       normal? ? administrator! : normal!
     else
@@ -29,6 +29,12 @@ class User < ApplicationRecord
   private
   def downcase_email
     self.email = email.downcase
+  end
+
+  def administrator_only_for_admin
+    if !admin? && administrator?
+      errors.add(:role, "Cannot switch to administrator for not admin account")
+    end
   end
 
   def cannot_downgrade_last_admin

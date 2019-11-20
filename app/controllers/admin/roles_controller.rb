@@ -4,7 +4,7 @@ class Admin::RolesController < Admin::ApplicationController
   skip_before_action :only_administrator
 
   def update
-    if current_user.switch_user
+    if current_user.switch_role
       flash[:success] = ""
       redirect_to root_path if current_user.normal?
       redirect_to admin_root_path if current_user.administrator?
