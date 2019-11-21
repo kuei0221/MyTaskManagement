@@ -1,9 +1,9 @@
 <li class="nav-item dropdown ">
   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    DashBoard
+    <%= t("views.header.dashboard")%>
   </a>
   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-    <%= link_to t("views.header.admin_user.users_list"), admin_root_path, class: "dropdown-item" %>
-    <%= link_to t("views.header.admin_user.missions_list"), admin_missions_path, class: "dropdown-item" %>
+    <%= link_to t("views.header.user_list"), admin_root_path, class: "dropdown-item" %>
+    <%= link_to t("views.header.mission_list"), admin_missions_path, class: "dropdown-item" %>
   </div>
 </li>

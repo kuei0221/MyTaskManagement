@@ -1,16 +1,21 @@
 <%= provide(:path, admin_search_path(model: Mission)) %>
 <%= provide(:role, "admin") %>
 
-<%= @user.name if @user.present? %>
+<div class="row my-3">
+  <h2 class="text-left"><%= t("admin.missions.index.title") %></h2>
+</div>
+<h5>
+  <%= "#{t("admin.missions.index.show_user")} ID: #{@user.id.to_s} #{@user.name}" if @user.present? %>
+</h5>
+
 
 <%= render "missions/mission_search_bar" %>
-
 
 <%= paginate @missions %>
 <table id="missions_table" class="table">
   <thead>
     <tr>
-      <th scope="col" class="text-nowrap">#</th>
+      <th scope="col" class="text-nowrap">ID</th>
       <th scope="col" class="text-nowrap"><%= t("missions.table.name") %></th>
       <th scope="col" class="text-nowrap"><%= t("missions.table.content") %></th>
       <th scope="col" class="text-nowrap"> <%= sortable(Mission, "created_at") %></th>
@@ -43,6 +48,8 @@
           </div>
         </div>
       </th>
+      <th scope="col" class="text-nowrap"><%= t("missions.table.edit") %></th>
+      <th scope="col" class="text-nowrap"><%= t("missions.table.destroy") %></th>
     </tr>
   </thead>
   <tbody>

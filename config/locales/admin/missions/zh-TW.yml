@@ -1,0 +1,6 @@
+zh-TW:
+  admin:
+    missions:
+      index:
+        title: 後台 - 任務
+        show_user: 顯示使用者

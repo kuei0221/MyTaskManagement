@@ -1,0 +1,16 @@
+en: 
+  admin:
+    users:
+      index:
+        title: BackStage - Users
+      create:
+        success: Successfully create new User.
+        alert: Fail to create new User.
+      update:
+        success: Successfully Update User's information
+        alert: Fail to update Users' information.
+      destroy:
+        success: Successfully destroy User.
+        alert: Fail to destroy User.
+        warning: This action is not reversible. Are You Sure You Want to Destroy This User? 
+      

@@ -7,33 +7,33 @@
     <%= hidden_field_tag :locale, params[:locale]%>
     <div class="input-group pr-3">
       <div class="input-group-prepend">
-        <%= label_tag :name, t("admin.users.table.search.name"), class: "input-group-text" %>
+        <%= label_tag :name, t("users.search.name"), class: "input-group-text" %>
       </div>
       <%= text_field_tag :name, nil, class: "form-control" %>
     </div>
     
     <div class="input-group pr-3">
       <div class="input-group-prepend">
-        <%= label_tag :email, t("admin.users.table.search.email"), class: "input-group-text" %>
+        <%= label_tag :email, t("users.search.email"), class: "input-group-text" %>
       </div>
       <%= email_field_tag :email, nil, class: "form-control" %>
     </div>
     
     <div class="input-group pr-3">
       <div class="input-group-prepend">
-        <%= label_tag :admin, t("admin.users.table.search.admin"), class: "input-group-text" %>
+        <%= label_tag :admin, t("users.search.admin"), class: "input-group-text" %>
       </div>
-      <%= select_tag :admin, options_for_select([[t("admin.users.table.admin.true"), true], [t("admin.users.table.admin.false"), false]]), include_blank: true, class: "form-control" %>
+      <%= select_tag :admin, options_for_select([[t("users.table.admin_option.true"), true], [t("users.table.admin_option.false"), false]]), include_blank: true, class: "form-control" %>
     </div>
     
     <div class="input-group pr-3">
-      <%= submit_tag t("missions.table.search.submit"), class: "btn btn-success" %>
+      <%= submit_tag t("users.search.submit"), class: "btn btn-success" %>
     </div>
 
-    <span class="navbar-text text-white pr-3"><%= t("admin.users.table.search.or")%></span>
+    <span class="navbar-text text-white pr-3"><%= t("users.search.or")%></span>
     
     <div class="input-group">
-      <%= link_to t("admin.users.table.create_button"), new_admin_user_path, class: "btn btn-primary form-control" %>
+      <%= link_to t("users.search.create_button"), new_admin_user_path, class: "btn btn-primary form-control" %>
     </div>
   <% end %>
 </nav>
@@ -43,14 +43,14 @@
 <table id="users_table" class="table">
   <thead>
     <tr>
-      <th scope="col" class="text-nowrap">#</th>
-      <th scope="col" class="text-nowrap"><%= t("admin.users.table.name") %></th>
-      <th scope="col" class="text-nowrap"><%= t("admin.users.table.email") %></th>
+      <th scope="col" class="text-nowrap">ID</th>
+      <th scope="col" class="text-nowrap"><%= t("users.table.name") %></th>
+      <th scope="col" class="text-nowrap"><%= t("users.table.email") %></th>
       <th scope="col" class="text-nowrap"> <%= sortable(User, "created_at") %></th>
       <th scope="col" class="text-nowrap"> <%= sortable(User, "admin") %></th>
       <th scope="col" class="text-nowrap"><%= sortable(User, "missions_count") %></th>
-      <th scope="col" class="text-nowrap"><%= t("admin.users.table.edit")%></th>
-      <th scope="col" class="text-nowrap"><%= t("admin.users.table.destroy")%></th>
+      <th scope="col" class="text-nowrap"><%= t("users.table.edit")%></th>
+      <th scope="col" class="text-nowrap"><%= t("users.table.destroy")%></th>
     </tr>
   </thead>
   <tbody>

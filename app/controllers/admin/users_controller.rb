@@ -12,33 +12,21 @@ class Admin::UsersController < Admin::ApplicationController
   def create
     @user = User.new(admin_user_params)
     if @user.admin? && @user.save
-      flash[:success] = ""
+      flash[:success] = t("admin.users.create.success")
       redirect_to admin_users_path
     else
-      flash.now[:alert] = ""
+      flash.now[:alert] = t("admin.users.create.alert")
       flash.now[:error] = @user.errors.full_messages
-      #error if created user not admin. Should set to validation in form object when refactoring
-      flash.now[:error] = "" unless @user.admin?
       render :new
     end
   end
 
-  # def show
-  #   @user = User.find_by id: params[:id]
-  #   if @user 
-  #     @missions = @user.missions.page params[:page]
-  #   else
-  #     flash[:alert] = ""
-  #     redirect_to admin_users_path
-  #   end
-  # end
-
   def destroy
     user = User.find_by id: params[:id]
     if user && user.destroy
-      flash[:success] = ""
+      flash[:success] = t("admin.users.destroy.success")
     else
-      flash[:alert] = ""
+      flash[:alert] = t("admin.users.destroy.alert")
     end
     redirect_to admin_users_path
   end
@@ -50,10 +38,10 @@ class Admin::UsersController < Admin::ApplicationController
   def update
     @user = User.find_by id: params[:id]
     if @user && @user.update(admin_user_params)
-      flash[:success] = ""
+      flash[:success] = t("admin.users.update.success")
       redirect_to admin_users_path
     else
-      flash.now[:alert] = ""
+      flash.now[:alert] = t("admin.users.update.alert")
       flash.now[:error] = @user.errors.full_messages
       render :edit
     end
@@ -63,6 +51,5 @@ class Admin::UsersController < Admin::ApplicationController
   def admin_user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin)
   end
-
 
 end

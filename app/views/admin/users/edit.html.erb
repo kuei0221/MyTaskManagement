@@ -1,34 +1,34 @@
 <div class="row my-3">
-  <h3 class="col text-center"><%= t("admin.users.new.title") %></h3>
+  <h3 class="col text-center"><%= t("users.edit.title") %></h3>
 </div>
 <div class="row justify-content-center">
   <%= form_for(@user, url: admin_user_path, method: "patch") do |f| %>
     <div class="form-group">
-      <%= f.label :name, t("users.new.name")%>
+      <%= f.label :name, t("users.edit.name")%>
       <%= f.text_field :name, class: "form-control" %>
     </div>
   
     <div class="form-group">
-      <%= f.label :email, t("users.new.email") %>
+      <%= f.label :email, t("users.edit.email") %>
       <%= f.email_field :email, class: "form-control" %>
     </div>
 
     <div class="form-group">
-      <%= f.label :password, t("users.new.password") %>
+      <%= f.label :password, t("users.edit.password") %>
       <%= f.password_field :password, class: "form-control" %>
     </div>
     <div class="form-group">
-      <%= f.label :password_confirmation, t("user.new.password_confirmation") %>
+      <%= f.label :password_confirmation, t("users.edit.password_confirmation") %>
       <%= f.password_field :password_confirmation, class: "form-control" %>
     </div>
 
     <div class="form-check pb-3">
       <%= f.check_box :admin, {class: "form-check-input"} , true, false %>
-      <%= f.label :admin, class: "form-check-label" %>
+      <%= f.label :admin, t("users.edit.admin"), class: "form-check-label" %>
     </div>
 
     <div class="form-group">
-      <%= f.submit t("users.new.submit"), class: "form-control btn btn-primary" %>
+      <%= f.submit t("users.edit.submit"), class: "form-control btn btn-primary" %>
     </div>
   <% end %>
 </div>

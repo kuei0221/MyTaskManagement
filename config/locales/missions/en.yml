@@ -1,8 +1,8 @@
 en:
   missions:
     create_button: Create New Mission
-    edit_button: Edit Mission
-    destroy_button: Delete Mission
+    edit_button: Edit
+    destroy_button: Delete
     return_button: Back to List
     wait_button: Wait
     progress_button: Start Progressing
@@ -30,13 +30,12 @@ en:
         medium: Medium
         high: High
       search:
+        user_id: User Id
         name: Name
         work_state: Status
         priority: Priority
         or: OR
         submit: Search
-    index:
-      title: My Task Management System
     new:
       title: Create New Mission
     create: 

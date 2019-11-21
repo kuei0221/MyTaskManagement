@@ -31,8 +31,9 @@ module SearchHelper
   def sortable(model, column)
     return nil unless is_model_and_column_exists? model, column
     direction = column == params[:sort] && sort_direction == "asc" ? "desc" : "asc"
+    text = t("#{model.to_s.downcase.pluralize}.table.#{column}")
     controller = params[:controller].include?("admin") ? "admin/search" : "search"
     pass_params = {controller: controller, action: :index, sort: column, direction: direction, model: model.to_s}.merge(search_query model)
-    link_to t("#{model.to_s.downcase.pluralize}.table.#{column}"), url_for(pass_params), class: "btn btn-primary text-white" 
+    link_to text, url_for(pass_params), class: "btn btn-primary text-white" 
   end
 end

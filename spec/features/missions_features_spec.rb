@@ -126,6 +126,7 @@ RSpec.feature "mission", type: :feature do
     click_button I18n.t("sessions.new.submit")
     expect(page).to have_content I18n.t("sessions.create.success")
     expect(page).to have_current_path root_path
+
     visit root_path 
     expect(page).to have_field(I18n.t("missions.table.search.name"))
     expect(page).to have_select(I18n.t("missions.table.search.work_state"))
@@ -143,7 +144,6 @@ RSpec.feature "mission", type: :feature do
     click_button I18n.t("missions.table.search.submit")
     expect(page).to have_css(".mission", count: 1)
     
-    
     fill_in I18n.t("missions.table.search.name"), with: "Testing"
     find("select#work_state").select(I18n.t("missions.table.state_type.completed"))
     find("select#priority").select(I18n.t("missions.table.priority_level.low"))
@@ -152,36 +152,37 @@ RSpec.feature "mission", type: :feature do
     expect(page).to have_css(".mission", count: 1)
   end
   
-  scenario "filter" do
+  scenario "filter button" do
     visit login_path
     fill_in I18n.t("sessions.new.email"), with: user.email
     fill_in I18n.t("sessions.new.password"), with: user.password
     click_button I18n.t("sessions.new.submit")
     expect(page).to have_content I18n.t("sessions.create.success")
     expect(page).to have_current_path root_path
+
     visit root_path
     click_link I18n.t("missions.table.state_type.waiting")
     all_state = all(".mission-work-state").map(&:text)
-    expect(all_state.uniq[0]).to eq I18n.t("missions.table.state_type.waiting")
+    expect(all_state.all? I18n.t("missions.table.state_type.waiting")).to be true
     click_link I18n.t("missions.table.state_type.progressing")
     all_state = all(".mission-work-state").map(&:text)
-    expect(all_state.uniq[0]).to eq I18n.t("missions.table.state_type.progressing")
+    expect(all_state.all? I18n.t("missions.table.state_type.progressing")).to be true
     click_link I18n.t("missions.table.state_type.completed")
     all_state = all(".mission-work-state").map(&:text)
-    expect(all_state.uniq[0]).to eq I18n.t("missions.table.state_type.completed")
+    expect(all_state.all? I18n.t("missions.table.state_type.completed")).to be true
     
     click_link I18n.t("missions.table.priority_level.low")
     all_priority = all(".mission-priority").map(&:text)
-    expect(all_priority.uniq[0]).to eq I18n.t("missions.table.priority_level.low")
+    expect(all_priority.all? I18n.t("missions.table.priority_level.low")).to be true 
     click_link I18n.t("missions.table.priority_level.medium")
     all_priority = all(".mission-priority").map(&:text)
-    expect(all_priority.uniq[0]).to eq I18n.t("missions.table.priority_level.medium")
+    expect(all_priority.all? I18n.t("missions.table.priority_level.medium")).to be true 
     click_link I18n.t("missions.table.priority_level.high")
     all_priority = all(".mission-priority").map(&:text)
-    expect(all_priority.uniq[0]).to eq I18n.t("missions.table.priority_level.high")
+    expect(all_priority.all? I18n.t("missions.table.priority_level.high")).to be true 
   end
   
-  scenario "filter and sort" do
+  scenario "filter and sort button" do
     visit login_path
     fill_in I18n.t("sessions.new.email"), with: user.email
     fill_in I18n.t("sessions.new.password"), with: user.password
@@ -191,7 +192,7 @@ RSpec.feature "mission", type: :feature do
     visit root_path
     click_link I18n.t("missions.table.state_type.waiting")
     all_state = all(".mission-work-state").map(&:text)
-    expect(all_state.uniq[0]).to eq I18n.t("missions.table.state_type.waiting")
+    expect(all_state.all? I18n.t("missions.table.state_type.waiting")).to be true 
     all_datetime = all(".mission-created-at").map(&:text).map(&:to_datetime)
     expect(all_datetime[0]).to be < all_datetime[1]
     click_link I18n.t("missions.table.created_at")
@@ -200,8 +201,7 @@ RSpec.feature "mission", type: :feature do
     all_datetime = all(".mission-created-at").map(&:text).map(&:to_datetime)
     expect(all_datetime[0]).to be > all_datetime[1]
     all_state = all(".mission-work-state").map(&:text)
-    expect(all_state.uniq[0]).to eq I18n.t("missions.table.state_type.waiting")
-    
+    expect(all_state.all? I18n.t("missions.table.state_type.waiting") ).to be true
   end
   
   scenario "search and sort" do
@@ -378,6 +378,43 @@ RSpec.feature "mission", type: :feature do
     expect(page).to have_text I18n.t("missions.destroy.success")
     expect(page).to have_current_path root_path
     expect(page).to have_css(".mission", count: 4)
+  end
+
+  scenario "header: when admin user in normal role" do
+    user = create(:user, :admin)
+    visit login_path
+    fill_in I18n.t("sessions.new.email"), with: user.email
+    fill_in I18n.t("sessions.new.password"), with: user.password
+    click_button I18n.t("sessions.new.submit")
+    expect(page).to have_content I18n.t("sessions.create.success")
+    expect(page).to have_current_path root_path
+    expect(page).to have_css "#role_dropdown"
+    expect(page).not_to have_css "#backstage_entrance"
+    
+  end
+  scenario "header: when admin user in administrator role " do
+    user = create(:user, :admin, :administrator)
+    visit login_path
+    fill_in I18n.t("sessions.new.email"), with: user.email
+    fill_in I18n.t("sessions.new.password"), with: user.password
+    click_button I18n.t("sessions.new.submit")
+    expect(page).to have_content I18n.t("sessions.create.success")
+    expect(page).to have_current_path root_path
+    expect(page).to have_css "#role_dropdown"
+    expect(page).to have_css "#backstage_entrance"
+  end
+
+  scenario "header: when normal user" do
+    user = create(:user)
+    visit login_path
+    fill_in I18n.t("sessions.new.email"), with: user.email
+    fill_in I18n.t("sessions.new.password"), with: user.password
+    click_button I18n.t("sessions.new.submit")
+    expect(page).to have_content I18n.t("sessions.create.success")
+    expect(page).to have_current_path root_path
+    expect(page).not_to have_css "#role_dropdown"
+    expect(page).not_to have_css "#backstage_entrance"
+    
   end
 
 end

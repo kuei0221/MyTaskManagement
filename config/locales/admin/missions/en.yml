@@ -1,0 +1,6 @@
+en: 
+  admin:
+    missions:
+      index:
+        title: Backstage - Mission
+        show_user: "Now Showing User" 

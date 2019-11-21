@@ -1,13 +1,6 @@
-<div class="row my-3">
-  <h2 class="text-left"><%= t("missions.index.title") %></h2>
-</div>
-
-<%= link_to "new admin user ", new_admin_user_path %>
-
 <%= provide(:path, search_path) %>
 <%= provide(:role, "normal") %>
-<%= render "missions/mission_search_bar" %>
-  
+<%= render "missions/mission_search_bar" %>  
 
 <%= paginate @missions %>
 <table id="missions_table" class="table">
@@ -46,6 +39,8 @@
           </div>
         </div>
       </th>
+      <th scope="col" class="text-nowrap"><%= t("missions.table.edit") %></th>
+      <th scope="col" class="text-nowrap"><%= t("missions.table.destroy") %></th>
     </tr>
   </thead>
   <tbody>

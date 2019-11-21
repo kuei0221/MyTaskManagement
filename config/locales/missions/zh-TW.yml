@@ -1,8 +1,8 @@
 zh-TW:
   missions:
     create_button: 新增任務
-    edit_button: 修改任務
-    destroy_button: 刪除任務
+    edit_button: 修改
+    destroy_button: 刪除
     return_button: 返回任務列表
     wait_button: 暫停處理
     progress_button: 開始處理
@@ -30,13 +30,12 @@ zh-TW:
         medium: 中
         high: 高
       search:
+        user_id: 使用者編號
         name: 任務名稱
         work_state: 任務狀態
         priority: 優先度
         or: 或
         submit: 搜尋
-    index:
-      title: 我的任務管理系統
     new:
       title: 新增任務
     create: 

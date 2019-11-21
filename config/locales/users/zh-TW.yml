@@ -6,7 +6,34 @@ zh-TW:
       email: 信箱
       password: 密碼
       password_confirmation: 確認密碼
+      admin: 管理權限
       submit: 註冊!
+    edit:
+      title: 修改會員資料
+      name: 名稱
+      email: 信箱
+      password: 密碼
+      password_confirmation: 確認密碼
+      admin: 管理權限
+      submit: 更新！
     create:
       success: 你已成功註冊成為新會員!
       alert: 有錯誤發生，註冊失敗。
+    search:
+      name: 名稱
+      email: 信箱
+      admin: 管理權限
+      create_button: 創建新使用者
+      submit: 搜尋
+      or: 或
+    table:
+      name: 名稱
+      email: 信箱
+      created_at: 創建時間
+      admin: 管理權限
+      admin_option:
+        true: 有
+        false: 無
+      missions_count: 任務數量
+      edit: 修改
+      destroy: 刪除

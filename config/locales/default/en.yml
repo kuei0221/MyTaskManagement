@@ -15,6 +15,13 @@ en:
           low: Low
           medium: Medium
           high: High
+      user:
+        admin_type:
+          true: "Yes"
+          false: "No"
+        role_type:
+          normal: Normal User
+          administrator: Administrator
     errors:
       messages:
         mission:
@@ -26,6 +33,17 @@ en:
     header:
       login: Login
       logout: Logout
+      brand: My Task Management System
+      role: Role
+      switch_role:
+        from_normal: Switch Role to Administrator
+        from_administrator: Switch Role to Normal
+      welcome: Welcome, 
+      to_backstage: To Backstage
+      to_frontstage: To Fronstage
+      dashboard: Dashboard
+      user_list: Users
+      mission_list: Missions
     pagination:
       first: First
       previous: previous 

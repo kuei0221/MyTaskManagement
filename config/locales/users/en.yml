@@ -2,11 +2,37 @@ en:
   users:
     new:
       title: Sign up as New User
-      name: name
+      name: Name
       email: Email
       password: Password
       password_confirmation: Password Confirmation
       submit: Sign up !
+    edit:
+      title: Edit User's Information
+      name: Name
+      email: Email
+      password: Password
+      password_confirmation: Password Confirmation
+      admin: Admin
+      submit: Update!
     create:
       success: "You have successfully sign up new account !"
       alert: "Opps. Something wrong when sign up."
+    search:
+        name: Name
+        email: Email
+        admin: Admin
+        create_button: Create New User
+        submit: Search
+        or: Or
+    table:
+      name: Name
+      email: Email
+      created_at: Created At
+      admin: Admin
+      admin_option:
+        true: "Yes"
+        false: "No"
+      missions_count: Missions Count
+      edit: Edit
+      destroy: Destroy
