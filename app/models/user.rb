@@ -6,6 +6,8 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: {case_sensitive: false}, format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i }
   validates :password, length: {minimum: 8}, on: :create
   validates :password, length: {minimum: 8}, on: :update, if: :password_digest_changed?
+  validate :administrator_only_for_admin
+  validate :cannot_downgrade_last_admin, on: :update, if: :admin_changed?
   has_secure_password
   scope :search_name, ->(name){ where("NAME ILIKE ?", "%#{name}%") }
   scope :search_email, ->(email){ where("EMAIL ILIKE ?", "%#{email.downcase}%") }
@@ -13,9 +15,7 @@ class User < ApplicationRecord
   scope :order_by_column, ->(column, direction) { order(column => direction) }
 
   before_save :downcase_email
-  after_validation :administrator_only_for_admin
   before_destroy :cannot_destroy_last_admin
-  before_update :cannot_downgrade_last_admin
   has_many :missions, dependent: :destroy
 
   def switch_role
@@ -38,9 +38,8 @@ class User < ApplicationRecord
   end
 
   def cannot_downgrade_last_admin
-    if admin_changed? && !admin? && self.class.search_admin(true).size == 1
+    if !admin? && self.class.search_admin(true).size == 1
       errors.add(:admin, "Cannot downgrade last admin") 
-      throw :abort
     end
   end
 
