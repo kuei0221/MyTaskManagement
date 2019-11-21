@@ -6,12 +6,12 @@ class Mission < ApplicationRecord
   enum priority: %w[ low medium high ]
   enum work_state: %w[ waiting progressing completed ]
   scope :order_by_column, ->(column, direction) { order(column => direction) }
-  scope :no_deadline, ->{ where("deadline is null") }
-  scope :with_deadline, ->{ where("deadline is not null") }
-  scope :search_work_state, ->(state) { where("work_state = ?", work_states.dig(state)) }
-  scope :search_name,-> (name) { where("name ilike ?", "%#{name}%") }
-  scope :search_priority,-> (level) { where("priority = ?", priorities.dig(level)) }
+  # scope :no_deadline, ->{ where("deadline is null") }
+  # scope :with_deadline, ->{ where("deadline is not null") }
   scope :search_user_id, ->(id) { where(user_id: id)}
+  scope :search_name,-> (name) { where("name ilike ?", "%#{name}%") }
+  scope :search_work_state, ->(state) { where(work_state: state) }
+  scope :search_priority,-> (level) { where(priority: level) }
   validates :name, presence: true, length: { minimum: 8, maximum: 48 }
   validates :content, presence: true, length: {minimum: 8, maximum: 254 }
   validate :datetime_before_created, on: :update
