@@ -15,10 +15,6 @@ en:
           low: Low
           medium: Medium
           high: High
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> b5a6d12fac4b62f2077ea6c60f0ad54acb1adf35
       user:
         admin_type:
           true: "Yes"
@@ -26,11 +22,6 @@ en:
         role_type:
           normal: Normal User
           administrator: Administrator
-<<<<<<< HEAD
-=======
->>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
-=======
->>>>>>> b5a6d12fac4b62f2077ea6c60f0ad54acb1adf35
     errors:
       messages:
         mission:
@@ -42,10 +33,6 @@ en:
     header:
       login: Login
       logout: Logout
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> b5a6d12fac4b62f2077ea6c60f0ad54acb1adf35
       brand: My Task Management System
       role: Role
       switch_role:
@@ -57,29 +44,14 @@ en:
       dashboard: Dashboard
       user_list: Users
       mission_list: Missions
-<<<<<<< HEAD
-=======
->>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
-=======
->>>>>>> b5a6d12fac4b62f2077ea6c60f0ad54acb1adf35
     pagination:
       first: First
       previous: previous 
       truncate: ...
       next: next
       last: Last
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> b5a6d12fac4b62f2077ea6c60f0ad54acb1adf35
   controllers:
     only_login_alert: Please Login First!
     only_not_login_alert: You are already Login
     only_admin_alert: You do no have enough permission to do the action.
     only_administrator_alert: Please Switch your role to Aministrator to do the action.
-    
-<<<<<<< HEAD
-=======
->>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
-=======
->>>>>>> b5a6d12fac4b62f2077ea6c60f0ad54acb1adf35
