@@ -17,7 +17,6 @@ class UsersController < ApplicationController
     end
   end
 
-<<<<<<< HEAD
   # only for demo usage, should remote after done.
   def test
     user = User.find_by(email: "testing@email.com")
@@ -26,8 +25,6 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
-=======
->>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
   private
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)

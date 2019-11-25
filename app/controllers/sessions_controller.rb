@@ -4,18 +4,7 @@ class SessionsController < ApplicationController
   
   def new
   end
-<<<<<<< HEAD
   
-=======
-  # this route only for testing, will login auto with test account
-  def test
-    user = User.find_by(email: "testing@email.com")
-    login user
-    flash[:success] = t("sessions.create.success")
-    redirect_to root_path
-  end
-
->>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
   def create
     user = User.find_by(email: login_params[:email])
     if user && user.authenticate(login_params[:password])

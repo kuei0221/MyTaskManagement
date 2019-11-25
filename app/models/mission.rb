@@ -1,6 +1,5 @@
 class Mission < ApplicationRecord
   include Filterable
-<<<<<<< HEAD
   filterable :name, :work_state, :priority, :user_id
   belongs_to :user, counter_cache: true
   paginates_per 10
@@ -13,19 +12,6 @@ class Mission < ApplicationRecord
   scope :search_name,-> (name) { where("name ilike ?", "%#{name}%") }
   scope :search_work_state, ->(state) { where(work_state: state) }
   scope :search_priority,-> (level) { where(priority: level) }
-=======
-  belongs_to :user
-  paginates_per 10
-  enum priority: %w[ low medium high ]
-  enum work_state: %w[ waiting progressing completed ]
-  scope :order_by_created_at, ->(direction) { order(created_at: direction) }
-  scope :order_by_column, ->(column, direction) { order(column => direction) }
-  scope :no_deadline, ->{ where("deadline is null") }
-  scope :with_deadline, ->{ where("deadline is not null") }
-  scope :search_work_state, ->(state) { where("work_state = ?", work_states.dig(state)) }
-  scope :search_name,-> (name) { where("name ilike ?", "%#{name}%") }
-  scope :search_priority,-> (level) { where("priority = ?", priorities.dig(level)) }
->>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
   validates :name, presence: true, length: { minimum: 8, maximum: 48 }
   validates :content, presence: true, length: {minimum: 8, maximum: 254 }
   validate :datetime_before_created, on: :update

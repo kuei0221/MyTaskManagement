@@ -1,5 +1,4 @@
 module SearchHelper
-<<<<<<< HEAD
   
   def model_exists?(model)
     klass = ActiveRecord.const_get model.to_s
@@ -37,6 +36,4 @@ module SearchHelper
     pass_params = {controller: controller, action: :index, sort: column, direction: direction, model: model.to_s}.merge(search_query model)
     link_to text, url_for(pass_params), class: "btn btn-primary text-white" 
   end
-=======
->>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
 end

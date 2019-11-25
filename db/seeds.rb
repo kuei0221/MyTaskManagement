@@ -16,9 +16,5 @@ end
   FactoryBot.create(:user_with_missions, missions_count: rand(1..100))
 end
 
-<<<<<<< HEAD
 user = FactoryBot.create(:user_with_missions, email: "testing@email.com", missions_count: 50, name: "testing_user")
 user = FactoryBot.create(:user_with_missions, :admin ,email: "admin_testing@email.com", missions_count: 50, name: "admin_testing_user")
-=======
-user = FactoryBot.create(:user_with_missions, email: "testing@email.com", missions_count: 50, name: "testing_user")
->>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e

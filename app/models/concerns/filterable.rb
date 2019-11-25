@@ -2,20 +2,13 @@ module Filterable
   extend ActiveSupport::Concern
 
   module ClassMethods
-<<<<<<< HEAD
     def filter(params)
       results = self.where(nil)
       params.slice(*filterable_column).each do |key, value|
-=======
-    def filter(filtering_params)
-      results = self.where(nil)
-      filtering_params.each do |key, value|
->>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
         results = results.public_send("search_#{key}", value) if value.present?
       end
       results
     end
-<<<<<<< HEAD
 
     def filterable_column
       return @filterable_column 
@@ -34,8 +27,6 @@ module Filterable
       # end
     end
 
-=======
->>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
   end
 
 end

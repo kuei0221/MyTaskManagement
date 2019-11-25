@@ -1,14 +1,8 @@
 en:
   missions:
-<<<<<<< HEAD
     create_button: New Mission
     edit_button: Edit
     destroy_button: Delete
-=======
-    create_button: Create New Mission
-    edit_button: Edit Mission
-    destroy_button: Delete Mission
->>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
     return_button: Back to List
     wait_button: Wait
     progress_button: Start Progressing
@@ -36,30 +30,19 @@ en:
         medium: Medium
         high: High
       search:
-<<<<<<< HEAD
         user_id: User Id
-=======
->>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
         name: Name
         work_state: Status
         priority: Priority
         or: OR
         submit: Search
-<<<<<<< HEAD
-=======
-    index:
-      title: My Task Management System
->>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
     new:
       title: Create New Mission
     create: 
       success: Create New Mission Success.
       fail: Error Occurred when Creating New Mission.
-<<<<<<< HEAD
     index:
       title: My Missions List
-=======
->>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
     show:
       title: "Mission: "
       fail: Cannot find this mission.
