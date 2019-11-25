@@ -17,6 +17,12 @@ class Admin::MissionsController < Admin::ApplicationController
   end
 
   def destroy
+    @mission = Mission.find_by(id: params[:id])
+    if @mission.destroy
+      redirect_to admin_missions_url, notice: t("missions.destroy.success")
+    else
+      redirect_to admin_missions_url, alert: t("missions.destroy.fail")
+    end
   end
 
 end

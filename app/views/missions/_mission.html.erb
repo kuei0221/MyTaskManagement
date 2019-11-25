@@ -7,7 +7,7 @@
   <td class="mission-work-state text-center"><%= t("missions.table.state_type.#{mission.work_state}") %> </td>
   <td class="mission-priority text-center"><%= t("missions.table.priority_level.#{mission.priority}") %> </td>
   <% if params[:controller].include? "admin" %>
-    <td class="mission-edit text-center"><%= link_to t("missions.edit_button"), edit_admin_mission_path(mission.id)%></td>
+    <td class="mission-edit text-center"><%= link_to t("missions.edit_button"), edit_admin_mission_path(mission.id) %></td>
     <td class="mission-destroy text-center"><%= link_to t("missions.destroy_button"), admin_mission_path(mission.id), method: "delete", data: {confirm:  t("missions.destroy.alert")}%></td>
   <% else %>
     <td class="mission-edit text-center"><%= link_to t("missions.edit_button"), edit_mission_path(mission.id)%></td>

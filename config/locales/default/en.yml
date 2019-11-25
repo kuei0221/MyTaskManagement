@@ -50,3 +50,9 @@ en:
       truncate: ...
       next: next
       last: Last
+  controllers:
+    only_login_alert: Please Login First!
+    only_not_login_alert: You are already Login
+    only_admin_alert: You do no have enough permission to do the action.
+    only_administrator_alert: Please Switch your role to Aministrator to do the action.
+    

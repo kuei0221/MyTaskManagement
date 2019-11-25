@@ -17,6 +17,14 @@ class UsersController < ApplicationController
     end
   end
 
+  # only for demo usage, should remote after done.
+  def test
+    user = User.find_by(email: "testing@email.com")
+    login user
+    flash[:success] = t("sessions.create.success")
+    redirect_to root_path
+  end
+
   private
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)

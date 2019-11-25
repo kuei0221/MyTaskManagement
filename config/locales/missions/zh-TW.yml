@@ -41,6 +41,8 @@ zh-TW:
     create: 
       success: 成功建立新任務
       fail: 無法建立新任務
+    index:
+      title: 我的任務列表
     show:
       title: "任務: "
       fail: 找不到此任務

@@ -13,14 +13,14 @@ class ApplicationController < ActionController::Base
 
   def only_not_login
     if login?
-      flash[:alert] = t("sessions.only_not_login.alert")
+      flash[:alert] = t("controllers.only_not_login_alert")
       redirect_to root_path
     end
   end
   
   def only_login
     unless login?
-      flash[:alert] = t("sessions.only_login.alert")
+      flash[:alert] = t("controllers.only_login_alert")
       redirect_to login_path
     end
   end

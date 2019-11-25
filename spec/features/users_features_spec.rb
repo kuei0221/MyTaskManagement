@@ -42,7 +42,7 @@ RSpec.feature "users", type: :feature do
     click_button I18n.t("sessions.new.submit")
 
     visit new_user_path
-    expect(page).to have_content I18n.t("sessions.only_not_login.alert")
+    expect(page).to have_content I18n.t("controllers.only_not_login_alert")
     expect(page).to have_current_path root_path
   end
 end

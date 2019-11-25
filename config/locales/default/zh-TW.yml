@@ -50,3 +50,8 @@ zh-TW:
       truncate: ...
       next: 下一頁
       last: 尾頁
+  controllers:
+    only_login_alert: 請先登入
+    only_not_login_alert: 你已經登入
+    only_admin_alert: 您並沒有足夠的權限執行此動作
+    only_administrator_alert: 請切換身分至管理員以執行此動作

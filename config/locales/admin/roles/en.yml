@@ -1,0 +1,6 @@
+en:
+  admin:
+    roles:
+      update:
+        success: "Successfully switch your role to "
+        alert: "Fail to switch your role to "

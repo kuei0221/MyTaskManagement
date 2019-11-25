@@ -1,0 +1,6 @@
+zh-TW:
+  admin:
+    roles:
+      update:
+        success: "已成功切換身分至"
+        alert: "無法切換身分至"

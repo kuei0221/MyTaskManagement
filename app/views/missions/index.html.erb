@@ -1,5 +1,9 @@
 <%= provide(:path, search_path) %>
 <%= provide(:role, "normal") %>
+<div class="row my-3">
+  <h2 class="text-left"><%= t("missions.index.title") %></h2>
+</div>
+
 <%= render "missions/mission_search_bar" %>  
 
 <%= paginate @missions %>

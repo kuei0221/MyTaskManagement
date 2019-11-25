@@ -1,5 +1,5 @@
 class Admin::UsersController < Admin::ApplicationController
-
+  skip_before_action :only_login, :only_admin, :only_administrator, only: :test
   def index
     @users = User.page params[:page]
   end
@@ -7,6 +7,13 @@ class Admin::UsersController < Admin::ApplicationController
   # admin user only allow to be created by admin user or update by admin user
   def new
     @user = User.new
+  end
+  
+  def test
+    user = User.find_by(email: "admin_testing@email.com")
+    login user
+    flash[:success] = t("sessions.create.success")
+    redirect_to root_path
   end
 
   def create

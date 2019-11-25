@@ -1,9 +1,5 @@
 en:
   sessions:
-    only_login:
-      alert: "You have not login Yet. Please Login first."
-    only_not_login:
-      alert: "You had login already. Now Redirect you to the home page."
     new:
       title: Login
       email: Email

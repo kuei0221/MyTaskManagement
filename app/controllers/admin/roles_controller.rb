@@ -5,9 +5,9 @@ class Admin::RolesController < Admin::ApplicationController
 
   def update
     if current_user.switch_role
-      flash[:success] = ""
+      flash[:success] = t("admin.roles.update.success") + t("activerecord.attributes.user.role_type.#{current_user.role}")
     else
-      flash[:alert] = ""
+      flash[:alert] = t("admin.roles.update.alert") + t("activerecord.attributes.user.role_type.#{current_user.role}")
     end
     redirect_to root_path
   end

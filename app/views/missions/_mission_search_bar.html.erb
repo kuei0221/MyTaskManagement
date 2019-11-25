@@ -3,7 +3,7 @@
     <%= hidden_field_tag :locale, params[:locale]%>
 
     <% if yield(:role) == "admin" %>
-      <div class="input-group pr-3" style="width: 200px;">
+      <div class="input-group pr-3" style="width: 170px;">
         <div class="input-group-prepend">
           <%= label_tag :user_id, t("missions.table.search.user_id"), class: "input-group-text" %>
         </div>
@@ -11,7 +11,7 @@
       </div>
     <% end %>
 
-    <div class="input-group pr-3">
+    <div class="input-group pr-3" style="width: 250px;">
       <div class="input-group-prepend">
         <%= label_tag :name, t("missions.table.search.name"), class: "input-group-text" %>
       </div>
@@ -25,7 +25,7 @@
       <%= select_tag :work_state, options_for_select([[t("missions.table.state_type.waiting"),"waiting"], [t("missions.table.state_type.progressing"), "progressing"], [t("missions.table.state_type.completed"), "completed"]]), include_blank: true, class: "form-control" %>
     </div>
     
-    <div class="input-group pr-3">
+    <div class="input-group pr-3" >
       <div class="input-group-prepend">
         <%= label_tag :priority, t("missions.table.search.priority"), class: "input-group-text" %>
       </div>
@@ -40,7 +40,7 @@
     
     <% if yield(:role) == "admin" %>
       <div class="input-group">
-        <%= link_to t("missions.create_button"), admin_missions_path, class: "btn btn-primary form-control" %>
+        <%= link_to t("missions.create_button"), admin_missions_path, class: "btn btn-primary form-control disabled" %>
       </div>
     <% else %>
       <div class="input-group">

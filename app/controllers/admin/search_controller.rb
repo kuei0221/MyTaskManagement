@@ -15,7 +15,8 @@ class Admin::SearchController < Admin::ApplicationController
         render template: "admin/missions/index"
       end
     else
-      flash[:alert] = ""
+      #requre modifiy for this text setting.
+      flash[:alert] = t("search.index.alert")
       redirect_to admin_root_path
     end
   end

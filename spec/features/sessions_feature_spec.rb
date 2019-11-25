@@ -28,7 +28,7 @@ RSpec.feature "sessions", type: :feature do
     expect(page).to have_current_path root_path
     
     visit login_path
-    expect(page).to have_content I18n.t("sessions.only_not_login.alert")
+    expect(page).to have_content I18n.t("controllers.only_not_login_alert")
     expect(page).to have_current_path root_path
   end
 
@@ -47,7 +47,7 @@ RSpec.feature "sessions", type: :feature do
 
   scenario "logout when not login" do
     visit logout_path
-    expect(page).to have_content I18n.t("sessions.only_login.alert")
+    expect(page).to have_content I18n.t("controllers.only_login_alert")
     expect(page).to have_current_path login_path
   end
 

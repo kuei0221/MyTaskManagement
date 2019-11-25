@@ -1,6 +1,6 @@
 en:
   missions:
-    create_button: Create New Mission
+    create_button: New Mission
     edit_button: Edit
     destroy_button: Delete
     return_button: Back to List
@@ -41,6 +41,8 @@ en:
     create: 
       success: Create New Mission Success.
       fail: Error Occurred when Creating New Mission.
+    index:
+      title: My Missions List
     show:
       title: "Mission: "
       fail: Cannot find this mission.

@@ -17,3 +17,4 @@ end
 end
 
 user = FactoryBot.create(:user_with_missions, email: "testing@email.com", missions_count: 50, name: "testing_user")
+user = FactoryBot.create(:user_with_missions, :admin ,email: "admin_testing@email.com", missions_count: 50, name: "admin_testing_user")
