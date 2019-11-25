@@ -428,12 +428,14 @@ RSpec.describe Mission, type: :model do
     context "with work_state" do
       it "should show completed first in desc" do
         missions = Mission.order_by_column(:work_state, :desc).pluck(:work_state)
+        missions.map {|state| Mission.work_states[state] }
         expect(missions[0]).to be >= missions[1]
         expect(missions[1]).to be >= missions[2]
         expect(missions[2]).to be >= missions[3]
       end
       it "should show waiting first in asc" do
         missions = Mission.order_by_column(:work_state, :asc).pluck(:work_state)
+        missions.map {|state| Mission.work_states[state] }
         expect(missions[0]).to be <= missions[1]
         expect(missions[1]).to be <= missions[2]
         expect(missions[2]).to be <= missions[3]
@@ -443,12 +445,14 @@ RSpec.describe Mission, type: :model do
     context "with priority" do
       it "should show high priority first in desc" do
         missions = Mission.order_by_column(:priority, :desc).pluck(:priority)
+        missions.map {|level| Mission.priorities[level] }
         expect(missions[0]).to be >= missions[1]
         expect(missions[1]).to be >= missions[2]
         expect(missions[2]).to be >= missions[3]
       end
       it "should show low priority first in asc" do
         missions = Mission.order_by_column(:priority, :asc).pluck(:priority)
+        missions.map {|level| Mission.priorities[level] }
         expect(missions[0]).to be <= missions[1]
         expect(missions[1]).to be <= missions[2]
         expect(missions[2]).to be <= missions[3]
