@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe Mission, type: :model do
   let(:mission) { build(:mission) }
+<<<<<<< HEAD
   context "with factory-data " do
     it "should be valid" do
       expect(mission).to be_valid
@@ -10,43 +11,83 @@ RSpec.describe Mission, type: :model do
   end
   describe "#name" do
     context "when nil" do
+=======
+  describe "mission.name" do
+    context "with emtpy name" do
+>>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
       it "should be invalid" do
         mission = build(:mission, name: nil)
         expect(mission).to be_invalid
       end
     end
 
+<<<<<<< HEAD
     context "when less than 8 chr" do
+=======
+    context "with name less than 8 chr" do
+>>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
       it "should be invald" do
         mission = build(:mission, name: "a"*7)
         expect(mission).to be_invalid
       end
     end
 
+<<<<<<< HEAD
     context "when more that 48 chr" do
+=======
+    context "with name more that 48 chr" do
+>>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
       it "should be invalid" do
         mission = build(:mission, name: "a"*49)
         expect(mission).to be_invalid
       end
     end
+<<<<<<< HEAD
   end
 
   describe "#content" do
     context "when nil" do
+=======
+
+    context "with valid name" do
+      it "should be valid" do
+        expect(mission).to be_valid
+      end
+    end
+  end
+
+  describe "mission.content" do
+
+    context "with valid content" do
+      it "should be valid" do
+        expect(mission).to be_valid
+      end
+    end
+
+    context "with empty content" do
+>>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
       it "should be invalid" do
         mission = build(:mission, content: nil)
         expect(mission).to be_invalid
       end
     end
     
+<<<<<<< HEAD
     context "when less than 8 chr" do
+=======
+    context "with content less than 8 chr" do
+>>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
       it "should be invalid" do
         mission = build(:mission, content: "a"*7)
         expect(mission).to be_invalid
       end
     end
     
+<<<<<<< HEAD
     context "when more than 254 chr" do
+=======
+    context "with content more than 254 chr" do
+>>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
       it "should be invalid" do
         mission = build(:mission, content: "a"*255)
         expect(mission).to be_invalid
@@ -54,23 +95,44 @@ RSpec.describe Mission, type: :model do
     end
   end
 
+<<<<<<< HEAD
   describe "#deadline" do
     context "when nil" do
+=======
+  describe "mission.deadline" do
+    context "with valid date" do
+      it "should be valid " do
+        expect(mission).to be_valid
+      end
+    end
+
+    context "without provide date" do
+>>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
       it "should be valid" do
         mission = build(:mission, deadline: nil)
         expect(mission).to be_valid
       end
     end
 
+<<<<<<< HEAD
     context "when date is in past" do
       it "should be invalid" do
+=======
+    context "with past date" do
+      it "should be fail" do
+>>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
         mission = build(:mission, deadline: Faker::Date.backward(days: 10))
         expect(mission).to be_invalid
       end
     end
 
+<<<<<<< HEAD
     context "when it is earlier than its create date" do
       it "should be invalid" do
+=======
+    context "with date earlier than create date" do
+      it "should be fail" do
+>>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
         mission = build(:mission, created_at: DateTime.now, deadline: (DateTime.now - 10))
         expect(mission).to be_invalid
       end
@@ -78,6 +140,7 @@ RSpec.describe Mission, type: :model do
 
   end
 
+<<<<<<< HEAD
   describe "#work_state" do
     context "when create new mission" do
       it "should be waiting by default" do
@@ -86,6 +149,10 @@ RSpec.describe Mission, type: :model do
       end
     end
     context "with correct work state" do
+=======
+  describe "mission.work_state" do
+    context "with exist work state" do
+>>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
       it "should be valid with waiting" do
         mission = build(:mission, :waiting)
         expect(mission).to be_valid
@@ -98,6 +165,7 @@ RSpec.describe Mission, type: :model do
         mission = build(:mission, :completed)
         expect(mission).to be_valid
       end
+<<<<<<< HEAD
 
       it "should be valid with 0 which equal waiting" do
         mission = build(:mission, work_state: 0)
@@ -117,6 +185,11 @@ RSpec.describe Mission, type: :model do
     end
 
     context "with incorrect work-state" do
+=======
+    end
+
+    context "with invalid work-state" do
+>>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
       it "should be invalid with not used state" do
         expect{build(:mission, work_state: "not_used_state")}.to raise_error(ArgumentError, /is not a valid work_state/)
         expect{build(:mission, work_state: 3)}.to raise_error(ArgumentError, /is not a valid work_state/)
@@ -166,18 +239,34 @@ RSpec.describe Mission, type: :model do
 
   end
 
+<<<<<<< HEAD
   describe "::search_name" do
     context "when searching with string" do
       let!(:m1) { create(:mission, :waiting, name: "test example") }
       let!(:m2) { create(:mission, :progressing, name: "TESTING EXAMPLE") }
       let!(:m3) { create(:mission, :completed, name: "Tested Example") }
       it "should find the mission with given string" do
+=======
+  describe "::search scope" do
+    before do
+      create_list(:mission, 2, :waiting)
+      create_list(:mission, 3, :progressing)
+      create_list(:mission, 4, :completed)
+    end
+    
+    context "with search_name" do
+      let!(:m1) { create(:mission, :waiting, name: "test example") }
+      let!(:m2) { create(:mission, :progressing, name: "TESTING EXAMPLE") }
+      let!(:m3) { create(:mission, :completed, name: "Tested Example") }
+      it "should find the mission include given name" do
+>>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
         missions = Mission.search_name("Test")
         expect(missions.include?(m1)).to be true
         expect(missions.include?(m2)).to be true
         expect(missions.include?(m3)).to be true
       end
     end
+<<<<<<< HEAD
   end
 
   describe "::search_work_state" do
@@ -246,11 +335,37 @@ RSpec.describe Mission, type: :model do
     end
     context "with invalid priority" do
       it "should be invalid with not userd string" do
+=======
+    
+    context "with search_by_work_state" do
+      it "should find the correct number of mission with match state" do
+        missions = Mission.search_work_state(:waiting)
+        expect(missions.size).to eq(2)
+        missions = Mission.search_work_state(:progressing)
+        expect(missions.size).to eq(3)
+        missions = Mission.search_work_state(:completed)
+        expect(missions.size).to eq(4)
+      end
+    end
+    
+  end
+
+  describe "mission.priority" do
+    it "should be valid with default data" do
+      expect(mission).to be_valid
+    end
+    context "with invalid priority" do
+      it "should be invalid with string" do
+>>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
         expect{ build(:mission, priority: "super high")}.to raise_error(ArgumentError, /is not a valid priority/)
       end
       it "should be invalid with unused level" do
         expect{ build(:mission, priority: 10)}.to raise_error(ArgumentError, /is not a valid priority/)
       end
+<<<<<<< HEAD
+=======
+
+>>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
       it "should be invalid with nil" do
         mission = build(:mission, priority: nil)
         expect(mission).to be_invalid
@@ -286,6 +401,7 @@ RSpec.describe Mission, type: :model do
         expect{ mission.lower_priority }.not_to change{ mission.priority }
       end
     end
+<<<<<<< HEAD
   end
 
   describe "::search_priority" do
@@ -471,5 +587,10 @@ RSpec.describe Mission, type: :model do
     end
 
   end
+=======
+
+  end
+
+>>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
 
 end

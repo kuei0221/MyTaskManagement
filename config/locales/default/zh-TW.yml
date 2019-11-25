@@ -15,6 +15,7 @@ zh-TW:
           low: 低
           medium: 中
           high: 高
+<<<<<<< HEAD
       user:
         admin_type:
           true: 有
@@ -22,6 +23,8 @@ zh-TW:
         role_type:
           normal: 一般使用者
           administrator: 管理者
+=======
+>>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
     errors:
       messages:
         mission:
@@ -33,6 +36,7 @@ zh-TW:
     header:
       login: 登入
       logout: 登出
+<<<<<<< HEAD
       brand: 我的任務管理系統
       role: 身分
       switch_role:
@@ -44,14 +48,19 @@ zh-TW:
       dashboard: 資料表
       user_list: 使用者
       mission_list: 任務
+=======
+>>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
     pagination:
       first: 首頁
       previous: 上一頁
       truncate: ...
       next: 下一頁
       last: 尾頁
+<<<<<<< HEAD
   controllers:
     only_login_alert: 請先登入
     only_not_login_alert: 你已經登入
     only_admin_alert: 您並沒有足夠的權限執行此動作
     only_administrator_alert: 請切換身分至管理員以執行此動作
+=======
+>>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e

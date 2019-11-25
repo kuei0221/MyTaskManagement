@@ -1,13 +1,8 @@
 zh-TW:
   missions:
     create_button: 新增任務
-<<<<<<< HEAD
-    edit_button: 修改
-    destroy_button: 刪除
-=======
     edit_button: 修改任務
     destroy_button: 刪除任務
->>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
     return_button: 返回任務列表
     wait_button: 暫停處理
     progress_button: 開始處理
@@ -35,30 +30,18 @@ zh-TW:
         medium: 中
         high: 高
       search:
-<<<<<<< HEAD
-        user_id: 使用者編號
-=======
->>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
         name: 任務名稱
         work_state: 任務狀態
         priority: 優先度
         or: 或
         submit: 搜尋
-<<<<<<< HEAD
-=======
     index:
       title: 我的任務管理系統
->>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
     new:
       title: 新增任務
     create: 
       success: 成功建立新任務
       fail: 無法建立新任務
-<<<<<<< HEAD
-    index:
-      title: 我的任務列表
-=======
->>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
     show:
       title: "任務: "
       fail: 找不到此任務

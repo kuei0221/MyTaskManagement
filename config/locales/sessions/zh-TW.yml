@@ -1,5 +1,12 @@
 zh-TW:
   sessions:
+<<<<<<< HEAD
+=======
+    only_login:
+      alert:　你還沒登入，請先登入
+    only_not_login:
+      alert: 你已經登入，將轉到任務列表頁面。
+>>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
     new:
       title: 登入
       email: 信箱

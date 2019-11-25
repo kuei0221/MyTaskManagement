@@ -15,6 +15,7 @@ en:
           low: Low
           medium: Medium
           high: High
+<<<<<<< HEAD
       user:
         admin_type:
           true: "Yes"
@@ -22,6 +23,8 @@ en:
         role_type:
           normal: Normal User
           administrator: Administrator
+=======
+>>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
     errors:
       messages:
         mission:
@@ -33,6 +36,7 @@ en:
     header:
       login: Login
       logout: Logout
+<<<<<<< HEAD
       brand: My Task Management System
       role: Role
       switch_role:
@@ -44,15 +48,20 @@ en:
       dashboard: Dashboard
       user_list: Users
       mission_list: Missions
+=======
+>>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
     pagination:
       first: First
       previous: previous 
       truncate: ...
       next: next
       last: Last
+<<<<<<< HEAD
   controllers:
     only_login_alert: Please Login First!
     only_not_login_alert: You are already Login
     only_admin_alert: You do no have enough permission to do the action.
     only_administrator_alert: Please Switch your role to Aministrator to do the action.
     
+=======
+>>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e

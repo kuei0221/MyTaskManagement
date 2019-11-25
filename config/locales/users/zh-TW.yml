@@ -6,6 +6,7 @@ zh-TW:
       email: 信箱
       password: 密碼
       password_confirmation: 確認密碼
+<<<<<<< HEAD
       admin: 管理權限
       submit: 註冊!
     edit:
@@ -37,3 +38,9 @@ zh-TW:
       missions_count: 任務數量
       edit: 修改
       destroy: 刪除
+=======
+      submit: 註冊!
+    create:
+      success: 你已成功註冊成為新會員!
+      alert: 有錯誤發生，註冊失敗。
+>>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e

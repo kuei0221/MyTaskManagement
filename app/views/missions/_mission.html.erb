@@ -1,11 +1,17 @@
 <tr class="mission" id="mission-<%= mission.id %>">
   <th scope="row"><%= mission.id %></th>
+<<<<<<< HEAD
   <td class="mission-name text-truncate" style="max-width: 200px;"><%= link_to mission.name, mission_path(mission.id) %></td>
   <td class="mission-content text-truncate" style="max-width: 250px;"><%= mission.content %></td>
+=======
+  <td class="mission-name"><%= link_to mission.name, mission_path(mission.id) %></td>
+  <td class="mission-content text-truncate" style="max-width: 350px;"><%= mission.content %></td>
+>>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
   <td class="mission-created-at text-center"><%= mission.created_at.strftime("%Y-%m-%d") %> </td>
   <td class="mission-deadline  text-center"><%= mission.deadline.present? ? mission.deadline : t("missions.table.no_deadline") %> </td>
   <td class="mission-work-state text-center"><%= t("missions.table.state_type.#{mission.work_state}") %> </td>
   <td class="mission-priority text-center"><%= t("missions.table.priority_level.#{mission.priority}") %> </td>
+<<<<<<< HEAD
   <% if params[:controller].include? "admin" %>
     <td class="mission-edit text-center"><%= link_to t("missions.edit_button"), edit_admin_mission_path(mission.id) %></td>
     <td class="mission-destroy text-center"><%= link_to t("missions.destroy_button"), admin_mission_path(mission.id), method: "delete", data: {confirm:  t("missions.destroy.alert")}%></td>
@@ -13,4 +19,6 @@
     <td class="mission-edit text-center"><%= link_to t("missions.edit_button"), edit_mission_path(mission.id)%></td>
     <td class="mission-destroy text-center"><%= link_to t("missions.destroy_button"), mission_path(mission.id), method: "delete", data: {confirm:  t("missions.destroy.alert")}%></td>
   <% end %>
+=======
+>>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
 </tr>

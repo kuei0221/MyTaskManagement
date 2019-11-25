@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+<<<<<<< HEAD
   include Filterable
   filterable %w[name email admin]
   enum role: %w[ normal administrator ]
@@ -49,4 +50,11 @@ class User < ApplicationRecord
       throw :abort
     end
   end
+=======
+  has_many :missions, dependent: :destroy
+  validates :name, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: true, format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i }
+  validates :password, length: {minimum: 8}
+  has_secure_password
+>>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
 end

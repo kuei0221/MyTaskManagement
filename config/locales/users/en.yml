@@ -2,11 +2,16 @@ en:
   users:
     new:
       title: Sign up as New User
+<<<<<<< HEAD
       name: Name
+=======
+      name: name
+>>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
       email: Email
       password: Password
       password_confirmation: Password Confirmation
       submit: Sign up !
+<<<<<<< HEAD
     edit:
       title: Edit User's Information
       name: Name
@@ -36,3 +41,8 @@ en:
       missions_count: Missions Count
       edit: Edit
       destroy: Destroy
+=======
+    create:
+      success: "You have successfully sign up new account !"
+      alert: "Opps. Something wrong when sign up."
+>>>>>>> 798c040c1e2b52229f11c7a3cb801abd97bfd73e
