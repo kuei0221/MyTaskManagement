@@ -1,0 +1,54 @@
+<%= provide(:path, search_path) %>
+<%= provide(:role, "normal") %>
+<div class="row my-3">
+  <h2 class="text-left"><%= t("missions.index.title") %></h2>
+</div>
+
+<%= render "missions/mission_search_bar" %>  
+
+<%= paginate @missions %>
+<table id="missions_table" class="table">
+  <thead>
+    <tr>
+      <th scope="col" class="text-nowrap">#</th>
+      <th scope="col" class="text-nowrap"><%= t("missions.table.name") %></th>
+      <th scope="col" class="text-nowrap"><%= t("missions.table.content") %></th>
+      <th scope="col" class="text-nowrap"> <%= sortable(Mission, "created_at") %></th>
+      <th scope="col" class="text-nowrap"><%= sortable(Mission, "deadline") %></th>
+      <th scope="col" class="text-nowrap">
+        <div class="btn-group">
+          <%= sortable(Mission, "work_state") %>
+          <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" id="dropdownMenuReference" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-reference="parent">
+            <span class="sr-only">Toggle Dropdown</span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuReference">
+            <%= link_to t("missions.table.state_type.all"), search_path, class: "dropdown-item" %>
+            <%= link_to t("missions.table.state_type.waiting"), search_path(work_state: "waiting"), class: "dropdown-item" %>
+            <%= link_to t("missions.table.state_type.progressing"), search_path(work_state: "progressing"), class: "dropdown-item" %>
+            <%= link_to t("missions.table.state_type.completed"), search_path(work_state: "completed"), class: "dropdown-item" %>
+          </div>
+        </div>
+      </th>
+      <th scope="col" class="text-nowrap">
+        <div class="btn-group">
+          <%= sortable(Mission, "priority") %>
+          <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" id="dropdownMenuReference" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-reference="parent">
+              <span class="sr-only">Toggle Dropdown</span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuReference">
+            <%= link_to t("missions.table.priority_level.all"), search_path, class: "dropdown-item" %>
+            <%= link_to t("missions.table.priority_level.low"), search_path(priority: "low"), class: "dropdown-item" %>
+            <%= link_to t("missions.table.priority_level.medium"), search_path(priority: "medium"), class: "dropdown-item" %>
+            <%= link_to t("missions.table.priority_level.high"), search_path(priority: "high"), class: "dropdown-item" %>
+          </div>
+        </div>
+      </th>
+      <th scope="col" class="text-nowrap"><%= t("missions.table.edit") %></th>
+      <th scope="col" class="text-nowrap"><%= t("missions.table.destroy") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render partial: "missions/mission", collection: @missions %>
+  </tbody>
+</table>
+<%= paginate @missions %>

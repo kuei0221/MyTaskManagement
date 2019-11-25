@@ -1,0 +1,15 @@
+zh-TW:
+  admin:
+    users:
+      index:
+        title: 後台 - 使用者
+      create:
+        success: 已成功創建使用者
+        alert: 無法創建使用者
+      update:
+        success: 已成功修改此使用者的資料
+        alert: 無法修改此使用者的資料
+      destroy:
+        success: 已成功刪除此使用者
+        alert: 無法刪除此使用者
+        warning: 此動作無法回朔，請問您確定要執行嗎?

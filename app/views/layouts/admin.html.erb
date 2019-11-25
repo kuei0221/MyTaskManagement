@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mytaskmanagement</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <header class="header">
+    <%= provide(:header, "admin_header")%>
+    <%= render "layouts/header/header" %>
+  </header>
+  <body>
+    <div class="container">
+      <% show_flash %>
+      <%= yield %>
+    </div>
+  </body>
+
+  <footer class="footer">
+    <ul class="nav nav-tabs justify-content-end pr-5 my-3">
+      <li class="nav-item">
+        <%= link_to t("missions.return_button"), admin_users_path, class: "btn btn-light" %>
+      </li>    
+      <li class="nav-item">
+        <%= link_to "中文", {:controller => controller_name, :action => action_name, :locale => "zh-TW"}, class: "btn btn-light" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "English", {:controller => controller_name, :action => action_name, :locale => "en"}, class: "btn btn-light" %>
+      </li>
+    </ul>
+  </footer>
+  </html>

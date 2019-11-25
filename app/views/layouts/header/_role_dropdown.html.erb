@@ -1,0 +1,8 @@
+<li class="nav-item dropdown mx-3" id="role_dropdown">
+  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <%= t("activerecord.attributes.user.role_type.#{current_user.role}") %>
+  </a>
+  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <%= link_to t("views.header.switch_role.from_#{current_user.role}"), admin_role_path(current_user), method: "patch", class: "dropdown-item" %>
+  </div>
+</li>

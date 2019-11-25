@@ -1,0 +1,8 @@
+<%= render "layouts/header/to_backstage" if is_administrator? %>
+<%= render "layouts/header/role_dropdown" if is_admin? %>
+
+<% if login? %>
+  <%= render "layouts/header/logout" %>
+<% else %>
+  <%= render "layouts/header/login" %>
+<% end %>

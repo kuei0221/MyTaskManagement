@@ -1,0 +1,15 @@
+zh-TW:
+  sessions:
+    new:
+      title: 登入
+      email: 信箱
+      password: 密碼
+      submit: 登入!
+      divider: ------還沒有註冊?------
+      signup: 註冊帳號
+    create:
+      success: 登入成功
+      alert: 登入失敗!
+    destroy:
+      success: 成功登出
+      alert: 登出失敗!

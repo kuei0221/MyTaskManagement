@@ -1,0 +1,60 @@
+<div class="row my-3">
+  <h2 class="text-left"><%= t("admin.users.index.title") %></h2>
+</div>
+
+<nav class="navbar navbar-light bg-dark my-3">
+  <%= form_tag admin_search_path("User"), id: "search", method: "get", class: "form-inline" do %>
+    <%= hidden_field_tag :locale, params[:locale]%>
+    <div class="input-group pr-3">
+      <div class="input-group-prepend">
+        <%= label_tag :name, t("users.search.name"), class: "input-group-text" %>
+      </div>
+      <%= text_field_tag :name, nil, class: "form-control" %>
+    </div>
+    
+    <div class="input-group pr-3">
+      <div class="input-group-prepend">
+        <%= label_tag :email, t("users.search.email"), class: "input-group-text" %>
+      </div>
+      <%= email_field_tag :email, nil, class: "form-control" %>
+    </div>
+    
+    <div class="input-group pr-3">
+      <div class="input-group-prepend">
+        <%= label_tag :admin, t("users.search.admin"), class: "input-group-text" %>
+      </div>
+      <%= select_tag :admin, options_for_select([[t("users.table.admin_option.true"), true], [t("users.table.admin_option.false"), false]]), include_blank: true, class: "form-control" %>
+    </div>
+    
+    <div class="input-group pr-3">
+      <%= submit_tag t("users.search.submit"), class: "btn btn-success" %>
+    </div>
+
+    <span class="navbar-text text-white pr-3"><%= t("users.search.or")%></span>
+    
+    <div class="input-group">
+      <%= link_to t("users.search.create_button"), new_admin_user_path, class: "btn btn-primary form-control" %>
+    </div>
+  <% end %>
+</nav>
+  
+
+<%= paginate @users %>
+<table id="users_table" class="table">
+  <thead>
+    <tr>
+      <th scope="col" class="text-nowrap">ID</th>
+      <th scope="col" class="text-nowrap"><%= t("users.table.name") %></th>
+      <th scope="col" class="text-nowrap"><%= t("users.table.email") %></th>
+      <th scope="col" class="text-nowrap"> <%= sortable(User, "created_at") %></th>
+      <th scope="col" class="text-nowrap"> <%= sortable(User, "admin") %></th>
+      <th scope="col" class="text-nowrap"><%= sortable(User, "missions_count") %></th>
+      <th scope="col" class="text-nowrap"><%= t("users.table.edit")%></th>
+      <th scope="col" class="text-nowrap"><%= t("users.table.destroy")%></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render partial: "admin/users/user", collection: @users %>
+  </tbody>
+</table>
+<%= paginate @users %>

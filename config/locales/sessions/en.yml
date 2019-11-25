@@ -1,0 +1,15 @@
+en:
+  sessions:
+    new:
+      title: Login
+      email: Email
+      password: Password
+      submit: Sign in!
+      divider: ------Haven't Sign up Yet ?------
+      signup: Sign up!
+    create:
+      success: Successfully Login.
+      alert: Login Fail!
+    destroy:
+      success: Successfully Logout.
+      alert: Logout Fail!

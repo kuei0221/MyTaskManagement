@@ -1,0 +1,63 @@
+zh-TW:
+  missions:
+    create_button: 新增任務
+    edit_button: 修改
+    destroy_button: 刪除
+    return_button: 返回任務列表
+    wait_button: 暫停處理
+    progress_button: 開始處理
+    complete_button: 完成!
+    table:
+      name: 任務名稱
+      content: 任務內容
+      create: 新增
+      created_at: 建立時間
+      update: 更新
+      edit: 編輯
+      destroy: 刪除
+      deadline: 結束時間
+      no_deadline: 不設定結束時間
+      work_state: 狀態
+      state_type:
+        all: 全部
+        waiting: 待處理
+        progressing: 處理中
+        completed: 已完成
+      priority: 優先度
+      priority_level:
+        all: 全部
+        low: 低
+        medium: 中
+        high: 高
+      search:
+        user_id: 使用者編號
+        name: 任務名稱
+        work_state: 任務狀態
+        priority: 優先度
+        or: 或
+        submit: 搜尋
+    new:
+      title: 新增任務
+    create: 
+      success: 成功建立新任務
+      fail: 無法建立新任務
+    index:
+      title: 我的任務列表
+    show:
+      title: "任務: "
+      fail: 找不到此任務
+    edit:
+      title: 編輯任務
+    update:
+      success: 成功更新此任務
+      fail: 無法更新此任務
+    destroy:
+      alert: 確定刪除此任務?
+      success: 成功刪除此任務
+      fail: 無法刪除此任務
+  search:
+    index:
+      alert: 無法任何符合條件的任務
+  sorts:
+    index:
+      alert: "無效的排序"

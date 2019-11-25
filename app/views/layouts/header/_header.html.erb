@@ -1,0 +1,6 @@
+<ul class="nav nav-tabs d-flex pr-5 my-3 ">
+  <%= render "layouts/header/brand" %>
+  <%= render "layouts/header/welcome" if login? %>
+  <li class="nav-item ml-auto"></li>
+  <%= render "layouts/header/#{yield(:header)}" %>
+</ul>

@@ -1,0 +1,52 @@
+<nav class="navbar navbar-light bg-dark my-3">
+  <%= form_tag yield(:path), id: "search", method: "get", class: "form-inline" do %>
+    <%= hidden_field_tag :locale, params[:locale]%>
+
+    <% if yield(:role) == "admin" %>
+      <div class="input-group pr-3" style="width: 170px;">
+        <div class="input-group-prepend">
+          <%= label_tag :user_id, t("missions.table.search.user_id"), class: "input-group-text" %>
+        </div>
+        <%= number_field_tag :user_id, nil, min: 1, class: "form-control" %>
+      </div>
+    <% end %>
+
+    <div class="input-group pr-3" style="width: 250px;">
+      <div class="input-group-prepend">
+        <%= label_tag :name, t("missions.table.search.name"), class: "input-group-text" %>
+      </div>
+      <%= text_field_tag :name, nil, class: "form-control" %>
+    </div>
+    
+    <div class="input-group pr-3">
+      <div class="input-group-prepend">
+        <%= label_tag :work_state, t("missions.table.search.work_state"), class: "input-group-text" %>
+      </div>
+      <%= select_tag :work_state, options_for_select([[t("missions.table.state_type.waiting"),"waiting"], [t("missions.table.state_type.progressing"), "progressing"], [t("missions.table.state_type.completed"), "completed"]]), include_blank: true, class: "form-control" %>
+    </div>
+    
+    <div class="input-group pr-3" >
+      <div class="input-group-prepend">
+        <%= label_tag :priority, t("missions.table.search.priority"), class: "input-group-text" %>
+      </div>
+      <%= select_tag :priority, options_for_select([[t("missions.table.priority_level.low"), "low"], [t("missions.table.priority_level.medium"), "medium"], [t("missions.table.priority_level.high"), "high"]]), include_blank: true, class: "form-control" %>
+    </div>
+    
+    <div class="input-group pr-3">
+      <%= submit_tag t("missions.table.search.submit"), class: "btn btn-success" %>
+    </div>
+
+    <span class="navbar-text text-white pr-3"><%= t("missions.table.search.or")%></span>
+    
+    <% if yield(:role) == "admin" %>
+      <div class="input-group">
+        <%= link_to t("missions.create_button"), admin_missions_path, class: "btn btn-primary form-control disabled" %>
+      </div>
+    <% else %>
+      <div class="input-group">
+        <%= link_to t("missions.create_button"), new_mission_path, class: "btn btn-primary form-control" %>
+      </div>
+    <% end %>
+    
+  <% end %>
+</nav>
