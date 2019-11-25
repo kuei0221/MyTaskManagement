@@ -126,6 +126,7 @@ RSpec.feature "mission", type: :feature do
     click_button I18n.t("sessions.new.submit")
     expect(page).to have_content I18n.t("sessions.create.success")
     expect(page).to have_current_path root_path
+
     visit root_path 
     expect(page).to have_field(I18n.t("missions.table.search.name"))
     expect(page).to have_select(I18n.t("missions.table.search.work_state"))
